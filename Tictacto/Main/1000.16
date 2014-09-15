@@ -1,0 +1,30 @@
+/* Event Value Set  1000, Mouse button 1 double click */
+Arg window self
+
+/* Get index of selected cell 1000 Value Set */
+rowcol=VpGetIndex(window,1000)
+PARSE VAR rowcol row column
+IF SELECTED_CELLS.ROW.COLUMN='' THEN
+   do
+      selections=selections+1
+      /* Set cell value 1000 Value Set */
+      CALL VpSetItemValue window,1000,user,row,column
+      SELECTED_CELLS.ROW.COLUMN=USER
+           playerrow=row
+           playercol=column
+        
+           CALL TEST WINDOW 
+           if tst=1 then
+             call clear_board
+           else
+              do
+                call COMPSEL OPPONENT, window 
+                return  
+              end 
+                           
+   end
+ELSE
+   /* 1000 Hz for 200 millisec */
+   CALL VpBeep 1000,200 
+   
+

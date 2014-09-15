@@ -1,0 +1,8 @@
+Arg window self
+
+if length(imagefile)>0 then 
+   /* Save to file  Image Editor */
+   CALL VpImgEdt window,1010,'SAVE',imagefile,''
+else
+   /* Select item Save ~as... Menu Item */
+   CALL VpSelect window,262

@@ -1,0 +1,59 @@
+Arg window self
+
+/* Delete all items RESULTSCNR Container */
+CALL VpDeleteItem window,'RESULTSCNR','ALL'
+/* Get button state LOWPRICECB Check Box */
+LOPRICE = VpIsSelected(window,'LOWPRICECB')
+/* Get button state MIDPRICECB Check Box */
+MIDPRICE = VpIsSelected(window,'MIDPRICECB')
+/* Get button state HIPRICECB Check Box */
+HIPRICE = VpIsSelected(window,'HIPRICECB')
+/* Get item value SIZESB Spin Button */
+desired_size = VpGetItemValue(window,'SIZESB')
+/* Get button state URBANRB Radio Button */
+flag = VpIsSelected(window,'URBANRB')
+
+IF flag = 1 THEN
+   desired_area='urban'
+ELSE
+   desired_area='rural'
+
+homefound=0
+DO WHILE LINES(DATAFILE)
+   /* initialize the criteria flags */
+   rightsize=0
+   rightprice=0
+
+   /* read the home data lines */
+   place=LINEIN(datafile)
+   price=LINEIN(datafile)
+   size=LINEIN(datafile)
+   area=LINEIN(datafile)
+   homeinfo=LINEIN(datafile)
+   lotinfo=LINEIN(datafile)
+   realtor=LINEIN(datafile)
+   skip=LINEIN(datafile)
+SELECT
+   WHEN price > 200000
+      THEN if hiprice then rightprice=1
+   WHEN price < 100000
+      THEN if loprice then rightprice=1
+   OTHERWISE if midprice then rightprice=1
+END
+
+   if size >= desired_size then rightsize = 1
+
+   /* now check to see if all conditions are satisfied */
+   if rightprice & desired_area=area & rightsize then
+      DO
+         /* signify that at least 1 home met the criteria */
+         homefound=1
+         /* Add item to end with icon RESULTSCNR Container */
+         CALL VpAddItem window,'RESULTSCNR', 'END', place, houseicon
+      END
+END
+rc=stream(datafile,'c','close')
+
+if (homefound=0) then
+response=VpMessageBox(window,'Note','No homes matched the search criteria')
+

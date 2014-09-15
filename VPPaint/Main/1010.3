@@ -1,0 +1,8 @@
+/* Event Image Editor  1010, Popup menu */
+Arg window self
+
+call initedit window
+call initimgm window
+call initselm window
+/* Create a pop-up menu ~Image256 Menu Item */
+CALL VpWindow window, 'POPUP', 263, 272, 256

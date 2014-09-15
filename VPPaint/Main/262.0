@@ -1,0 +1,14 @@
+Arg window self
+
+if imagefile=='' then
+   filename = VpFileDialog(window,'SAVE','*.*','Save Picture')
+else
+   filename = VpFileDialog(window,'SAVE',imagefile,'Save Picture')
+
+IF LENGTH(filename) > 0 THEN
+   DO
+      /* Save to file  Image Editor */
+      CALL VpImgEdt window,1010,'SAVE',filename,''
+      imagefile=filename
+      CALL VpWindow window,'SETTITLE', prodname' - 'imagefile 
+   END

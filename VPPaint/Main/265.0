@@ -1,0 +1,4 @@
+Arg window self
+
+/* Undo  Image Editor */
+CALL VpImgEdt window, 1010, 'UNDO'

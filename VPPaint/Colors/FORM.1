@@ -1,0 +1,13 @@
+Arg window 
+
+/* Get pattern  Image Editor */
+value=VpImgEdt(mainwin, 1010, 'GETPATTERN')
+/* Set item value 1 Pattern Selector */
+CALL VpSetItemValue window,1000,value
+
+/* Get color  Image Editor */
+value=VpImgEdt(mainwin, 1010, 'GETCOLOR')
+/* Set item value  Color Selector */
+CALL VpSetItemValue window,1001,value 
+
+COLORWIN=window

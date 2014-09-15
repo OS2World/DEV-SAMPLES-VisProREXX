@@ -1,0 +1,4 @@
+Arg window self
+
+/* Copy  Image Editor */
+CALL VpImgEdt window, 1010, 'COPY'

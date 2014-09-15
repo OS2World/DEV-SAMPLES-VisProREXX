@@ -1,0 +1,30 @@
+/*****************************************************/
+/* Get customer information from window + Capitalize */
+/*****************************************************/
+arg window
+
+/* Get item value NAME Entry Field */
+value = VpGetItemValue(window,'NAME')
+PARSE UPPER VAR value cust.name
+/* Get item value FIRM Entry Field */
+value = VpGetItemValue(window,'FIRM')
+PARSE UPPER VAR value cust.company
+/* Get item value ADDRESS Entry Field */
+value = VpGetItemValue(window,'ADDRESS')
+PARSE UPPER VAR value cust.address
+/* Get item value CITY Entry Field */
+value = VpGetItemValue(window,'CITY')
+PARSE UPPER VAR value cust.city
+/* Get item value STATE Entry Field */
+value = VpGetItemValue(window,'STATE')
+PARSE UPPER VAR value cust.state
+/* Get item value COUNTRY Entry Field */
+value = VpGetItemValue(window,'COUNTRY')
+PARSE UPPER VAR value cust.country
+/* Get item value ZIP Entry Field */
+value = VpGetItemValue(window,'ZIP')
+PARSE UPPER VAR value cust.zip
+/* Get item value PHONE Entry Field */
+value = VpGetItemValue(window,'PHONE')
+PARSE UPPER VAR value cust.phone
+

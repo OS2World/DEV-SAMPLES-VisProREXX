@@ -1,0 +1,4 @@
+Arg window self
+
+/* Print image  Image Editor */
+CALL VpImgEdt window, 1010, 'PRINT'

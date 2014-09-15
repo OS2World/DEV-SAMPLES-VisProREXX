@@ -1,0 +1,12 @@
+Arg window self
+
+filename = VpFileDialog(window,'OPEN','*.BMP','Open Image')
+IF LENGTH(filename) > 0 THEN
+   DO
+      /* Load from file  Image Editor */
+      CALL VpImgEdt window,1010,'LOAD',filename,''
+      imagefile=filename
+      CALL VpWindow window,'SETTITLE', prodname' - 'imagefile 
+      if attrwin<>0 then
+          call setattrs	
+   END

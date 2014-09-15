@@ -1,0 +1,12 @@
+/* Menu events - ~Edit */
+Arg window self
+
+value=VpWindow(window,'GETCLIPBOARD','Link')
+
+if value<>'' then
+  /* Enable item ~Paste257 Menu Item */
+  CALL VpItem window,257,'ENABLE'
+
+else
+  /* Disable item ~Paste257 Menu Item */
+  CALL VpItem window,257,'DISABLE'

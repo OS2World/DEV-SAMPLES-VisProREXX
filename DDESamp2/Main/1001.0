@@ -1,0 +1,29 @@
+/* Event Clicked/selected - text  1001 */
+Arg window self
+
+/* Delete all items 1002 List Box */
+CALL VpDeleteItem window,1002,'ALL'
+
+/* Get all conversations No active conversation1000 DDE Client */
+rc=VpDDECLT(window, 'DDECLIENT', 'GETCONV','conv.')
+
+if conv.0 = 0 then do
+   /* Add item to end CONVLIST List Box */
+   index=VpAddItem(window, 'CONVLIST', 'END', '<No DDE servers available>')
+   
+   /* Disable item CONNECTPB Push Button */
+   CALL VpItem window,'CONNECTPB','DISABLE'
+   
+
+end
+else do
+   /* Add items from list CONVLIST List Box */
+   index=VpAddItem(window, 'CONVLIST', 'LIST', 'conv.')
+   
+   /* Enable item CONNECTPB Push Button */
+   CALL VpItem window,'CONNECTPB','ENABLE'
+   
+   /* Select item CONVLIST List Box */
+   CALL VpSelect window,'CONVLIST',1,1
+
+end

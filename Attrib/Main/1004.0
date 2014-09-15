@@ -1,0 +1,18 @@
+/* Event S  1004, Clicked/selected */
+Arg window self
+
+/* Get button state ~Hidden1004 Check Box */
+flag = VpIsSelected(window,1004)
+if flag==2 then
+ do
+   flag=0
+   /* Uncheck the item ~Hidden1004 Check Box */
+   CALL VpSelect window,1004,flag
+ end
+
+if flag==0 then
+   state='OFF'
+else
+   state='ON'
+
+call pressed window, H, posofh, state

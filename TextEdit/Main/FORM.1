@@ -1,0 +1,40 @@
+/* Form events - Opened */
+Arg window 
+
+call RxFuncAdd 'SysLoadFuncs','RexxUtil','SysLoadFuncs'
+call SysLoadFuncs
+
+CALL VpWindow window,'DISABLESTDIO'
+
+hwnd_main=window
+
+
+current_directory=directory()
+
+drive=left(directory(),3)
+drg_file='!!drg.del'
+crlf=x2c(0d)||x2c(0a)
+
+window_title='Editor -'
+untitled='<untitled>'
+
+if topic<>'' then do
+  filename=topic
+  /* Load item from file 1000 Multi-Line Entry Field */
+  CALL VpLoadFromFile window,1000,filename
+  CALL VpWindow window,'SETTITLE',window_title filename
+  call read_ea
+  /* Set changed flag off 1000 Multi-Line Entry Field */
+  rc=VpItem(window,1000,'SENDMSG','0x01bb','0','0')
+end
+else do
+  filename='untitled'
+  CALL VpWindow window,'SETTITLE',window_title untitled
+end
+
+drgico=VpLoadPicture('RESICON',3000)
+
+/* max num items, type, rendering, moveok, copyok, linkok, default */
+CALL VpWindow window,'SETFORMDRAGINFO',1,'Plain Text','<DRM_OS2FILE,DRF_TEXT>',1,1,1,'MOVE'
+
+

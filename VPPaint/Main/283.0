@@ -1,0 +1,7 @@
+Arg window self
+
+/* Get zoom level  Image Editor */
+value=VpImgEdt(window, 1010, 'GETZOOM')
+value=value*2
+/* Set zoom level  Image Editor */
+CALL VpImgEdt window, 1010, 'SETZOOM', value

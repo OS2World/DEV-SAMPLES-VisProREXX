@@ -1,0 +1,4 @@
+Arg window self
+
+/* Cut  Image Editor */
+CALL VpImgEdt window, 1010, 'CUT'

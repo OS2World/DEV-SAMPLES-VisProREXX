@@ -1,0 +1,7 @@
+Arg window self
+
+/* Set item value  Entry Field */
+CALL VpSetItemValue window,1001,0
+OPER=0
+TABUL=0
+

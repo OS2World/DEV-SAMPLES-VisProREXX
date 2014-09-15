@@ -1,0 +1,8 @@
+Arg window self
+
+/* Start a thread, thread to end when count reaches 1000 */
+tid1 = VpThread("START", 0,"THREAD1.CMD",window, 1001,1000)
+if tid1='' then response=VpMessageBox(window,'','Error creating thread')
+
+/* Select item REFRESH Push Button */
+CALL VpSelect window,'REFRESH'

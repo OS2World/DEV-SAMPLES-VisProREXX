@@ -1,0 +1,72 @@
+/*******************************/
+/* Find a customer information */
+/*******************************/
+Arg window
+ret=0
+
+call sqldbs 'START USING DATABASE dbsample IN SHARED MODE';
+if (SQLCA.SQLCODE <> 0) then do
+    response=VpMessageBox(window,TITLE,'START USING DATABASE Error :  SQLCODE = ' SQLCA.SQLCODE)
+    return SQLCA.SQLCODE
+end
+
+/* Create The SQL Select Statement  */
+prep_string = "SELECT ",
+   "CUST_CUSTOMER_ID, ",
+   "CUST_NAME, ",
+   "CUST_COMPANY, ",
+   "CUST_ADDRESS, ",
+   "CUST_CITY, ",
+   "CUST_STATE, ",
+   "CUST_ZIP, ",
+   "CUST_COUNTRY, ",
+   "CUST_PHONE  ",
+   "FROM userid.customer ",
+   " WHERE CUST_CUSTOMER_ID = " || cust.customer_id;
+
+/* Get cursor ready to access data */
+call sqlexec 'DECLARE c1 CURSOR FOR s1';
+
+call sqlexec 'PREPARE s1 FROM :prep_string';
+if ( SQLCA.SQLCODE <> 0) then do
+   response=VpMessageBox(window,TITLE,'PREPARE STATEMENT Error.'SQLCA.SQLMSG)
+   ret = 1
+end
+else do
+   call sqlexec 'OPEN c1';
+
+   /* Retrieve Data From The Cursor And Display It  */
+   if (SQLCA.SQLCODE = 0) then do
+
+      cmd_string = "FETCH c1 INTO ",
+         ":cust.customer_id, ",
+         ":cust.name, ",
+         ":cust.company, ",
+         ":cust.address, ",
+         ":cust.city, ",
+         ":cust.state, ",
+         ":cust.zip, ",
+         ":cust.country, ",
+         ":cust.phone"
+
+      call sqlexec cmd_string;
+
+      if ( SQLCA.SQLCODE <> 0) then do
+         ret = 1
+         response=VpMessageBox(window,TITLE,'Error finding customer.'SQLCA.SQLMSG)
+      end
+   end
+
+end
+
+/* close the cursor */
+call sqlexec 'CLOSE c1';
+
+call sqldbs 'STOP USING DATABASE';
+if (SQLCA.SQLCODE <> 0) then do
+    response=VpMessageBox(window,TITLE,'STOP USING DATABASE Error :  SQLCODE = ' SQLCA.SQLCODE)
+    return SQLCA.SQLCODE
+end
+
+return ret
+

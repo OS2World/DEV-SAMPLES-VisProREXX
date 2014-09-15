@@ -1,0 +1,12 @@
+Arg window 
+
+/* check if there was a change, if not, just exit */
+/* if change, ask the user to save? */
+/* save if needed */
+/* if error saving, mention it */
+if changed<>0 then do
+   response=VpMessageBox(window,'Visual Resource','Do you want to save your changes?','YESNO')
+   if response=='YES' then
+      /* Select item ~Save Menu Item */
+      CALL VpSelect window,266
+end

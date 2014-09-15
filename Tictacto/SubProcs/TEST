@@ -1,0 +1,52 @@
+arg window
+tst=0
+   VA.=''
+   VAL.=''
+   VALU.='' 
+   r=1
+   c=1
+   rr=1
+   cc=3
+   position=0   
+   do i=1 to 3                             /* gives stem variables a value */
+     va.i=selected_cells.row.i
+     val.i=selected_cells.i.column
+     valu.i=selected_cells.r.c
+     r=r+1
+     c=c+1
+     value.i=selected_cells.rr.cc
+     rr=rr+1
+     cc=cc-1
+   end /* end do */
+     if val.1=val.2 & val.2=val.3 & val.1<>''then  /*  tests rows and columns for three in a row */
+        do
+          position=1
+          tst=1
+        end
+      if va.1=va.2 & va.2=va.3 & va.1<>'' then 
+        do
+           position=2
+           tst=1
+                   
+        end
+    if value.1=value.2 & value.2=value.3 & value.1<>'' then /* tests diagonal from bottom left to top right corner */
+        do
+          tst=1
+          position=3
+           	      
+        end
+       if valu.1=valu.2 & valu.2=valu.3 & valu.1<>'' then /* tests diagonal from top left corner to bottom right corner */
+        do
+          tst=1     
+          position=4   
+                    
+            
+        end
+        if tst=1 then
+          do
+            call winner window
+            return
+          end
+        else
+            return
+

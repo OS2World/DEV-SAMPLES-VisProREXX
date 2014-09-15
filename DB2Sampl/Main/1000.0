@@ -1,0 +1,44 @@
+Arg window self
+
+/* Get index of first selected value CUSTLIST List Box */
+index=VpGetIndex(window,'CUSTLIST','SELECTED',0)
+if index=1 then do
+   /* Select item CLEAR Push Button */
+   CALL VpSelect window,'CLEAR'
+   /* Disable item CHANGE Push Button */
+   CALL VpItem window,'CHANGE','DISABLE'
+   /* Disable item DELETE Push Button */
+   CALL VpItem window,'DELETE','DISABLE'
+end
+else do
+   /* Get item value CUSTLIST List Box */
+   value = VpGetItemValue(window,'CUSTLIST')
+   cust.customer_id = strip(substr(value,52,10))
+   rc = findcust(window)
+   if rc=0 then do
+      /* Set item value CUSTNUM Entry Field */
+      CALL VpSetItemValue window,'CUSTNUM',strip(cust.customer_id)
+      /* Set item value NAME Entry Field */
+      CALL VpSetItemValue window,'NAME',strip(cust.name)
+      /* Set item value FIRM Entry Field */
+      CALL VpSetItemValue window,'FIRM',strip(cust.company)
+      /* Set item value ADDRESS Entry Field */
+      CALL VpSetItemValue window,'ADDRESS',strip(cust.address)
+      /* Set item value CITY Entry Field */
+      CALL VpSetItemValue window,'CITY',strip(cust.city)
+      /* Set item value STATE Entry Field */
+      CALL VpSetItemValue window,'STATE',strip(cust.state)
+      /* Set item value COUNTRY Entry Field */
+      CALL VpSetItemValue window,'COUNTRY',strip(cust.country)
+      /* Set item value ZIP Entry Field */
+      CALL VpSetItemValue window,'ZIP',strip(cust.zip)
+      /* Set item value PHONE Entry Field */
+      CALL VpSetItemValue window,'PHONE',strip(cust.phone)
+
+      /* Enable item CHANGE Push Button */
+      CALL VpItem window,'CHANGE','ENABLE'
+      /* Enable item DELETE Push Button */
+      CALL VpItem window,'DELETE','ENABLE'
+   end
+end
+

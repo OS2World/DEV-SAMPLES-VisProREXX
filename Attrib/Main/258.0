@@ -1,0 +1,6 @@
+/* Menu events - Select All */
+Arg window self
+
+/* Select all items 1001 List Box */
+CALL VpSelect window,1001,'ALL',1
+ 

@@ -1,0 +1,9 @@
+/* Event Clicked/selected - Connect  1003 */
+Arg window self
+
+/* Get item value 1002 List Box */
+value = VpGetItemValue(window,'CONVLIST')
+parse var value appname','topicname
+
+/* Initiate conversation DDECLIENT DDE Client */
+rc=VpDDECLT(window, 'DDECLIENT', 'INITIATE',appName,topicName)

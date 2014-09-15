@@ -1,0 +1,9 @@
+Arg window self
+
+CALL VpWindow window,'HIDE'
+call SysSleep 3
+/* Capture screen  Image Editor */
+CALL VpImgEdt window, 1010, 'CAPTURE'
+CALL VpWindow window,'SHOW'
+if attrwin<>0 then
+    call setattrs	

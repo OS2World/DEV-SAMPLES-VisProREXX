@@ -1,0 +1,22 @@
+Arg window 
+
+/* Set range  Spin Button */
+CALL VpSetRange window,1004,1,30  /* Set spin button range*/
+/* Set range  Spin Button */
+CALL VpSetRange window,1005,1,30  /* Set spin button range*/
+rc=VpImgEdt(mainwin,1010,'GETGRIDSIZE')
+parse var rc x y
+/* Set item value  Spin Button */
+CALL VpSetItemValue window,1004,x
+/* Set item value  Spin Button */
+CALL VpSetItemValue window,1005,y
+
+value=VpImgEdt(mainwin,1010,'ISGRIDON')
+if value==1 then
+   /* Check the item  Snap to grid Check Box */
+   CALL VpSelect window,1001,1
+
+value=VpImgEdt(mainwin,1010,'ISGRIDSHOWING')
+if value==1 then   
+   /* Check the item  ~Show grid Check Box */
+   CALL VpSelect window,1000,1

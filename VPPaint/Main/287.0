@@ -1,0 +1,7 @@
+Arg window self
+
+if settingswin==0 then
+   /* Open the form D:\VISPRORX\PROJECTS\PAINT\Settings*/
+   settingswin=VpOpenForm(window, 258, 'topic name')
+else
+   CALL VpWindow settingswin,'ACTIVATE'

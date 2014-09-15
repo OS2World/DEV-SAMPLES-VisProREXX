@@ -1,0 +1,20 @@
+Arg window self
+
+/* Get index of first selected item THREADLST List Box */
+index=VpGetIndex(window,'THREADLST','SELECTED',0)
+if index=1 then do
+   /* Disable item SUSPEND Push Button */
+   CALL VpItem window,'SUSPEND','DISABLE'
+   /* Disable item PROCEED Push Button */
+   CALL VpItem window,'PROCEED','DISABLE'
+   /* Disable item KILL Push Button */
+   CALL VpItem window,'KILL','DISABLE'
+   end
+else do
+   /* Enable item SUSPEND Push Button */
+   CALL VpItem window,'SUSPEND','ENABLE'
+   /* Enable item PROCEED Push Button */
+   CALL VpItem window,'PROCEED','ENABLE'
+   /* Enable item KILL Push Button */
+   CALL VpItem window,'KILL','ENABLE'
+   end      

@@ -1,0 +1,4 @@
+Arg window self
+
+/* Rotate 270 degrees  Image Editor */
+CALL VpImgEdt window, 1010, 'ROTATE270'

@@ -1,0 +1,140 @@
+/***********************************/
+/* Search for customer information */
+/***********************************/
+Arg window
+ret=0
+
+call sqldbs 'START USING DATABASE dbsample IN SHARED MODE';
+if (SQLCA.SQLCODE <> 0) then do
+    response=VpMessageBox(window,TITLE,'START USING DATABASE Error :  SQLCODE = ' SQLCA.SQLCODE)
+    return SQLCA.SQLCODE
+end
+
+/* Painting disable CUSTLIST List Box */
+CALL VpItem window,'CUSTLIST','DISABLEPAINT'
+
+/* Delete all items CUSTLIST List Box */
+CALL VpDeleteItem window,'CUSTLIST','ALL'
+
+/* Create The SQL Select Statement  */
+prep_string = "SELECT ",
+   "CUST_CUSTOMER_ID, ",
+   "CUST_NAME, ",
+   "CUST_COMPANY, ",
+   "CUST_ADDRESS, ",
+   "CUST_CITY, ",
+   "CUST_STATE, ",
+   "CUST_ZIP, ",
+   "CUST_COUNTRY, ",
+   "CUST_PHONE ",
+   "FROM userid.customer";
+
+/* Any non empty search parameter is searched for, except for customer_id */
+search_string = ""
+if length(cust.name) > 0 then do
+   if length(search_string) > 0 then
+      search_string = search_string || " AND "
+   search_string = search_string || " CUST_NAME LIKE " || "'" || cust.name ||'%'|| "'"
+end
+if length(cust.company) > 0 then do
+   if length(search_string) > 0 then
+      search_string = search_string || " AND "
+   search_string = search_string || " CUST_COMPANY LIKE "   || "'" || cust.company||'%'|| "'"
+end
+if length(cust.address) > 0 then do
+   if length(search_string) > 0 then
+      search_string = search_string || " AND "
+   search_string = search_string || " CUST_ADDRESS LIKE "   || "'" || cust.address||'%'|| "'"
+end
+if length(cust.city) > 0 then do
+   if length(search_string) > 0 then
+      search_string = search_string || " AND "
+   search_string = search_string || " CUST_CITY LIKE  "     || "'" || cust.city||'%'|| "'"
+end
+if length(cust.state) > 0 then do
+   if length(search_string) > 0 then
+      search_string = search_string || " AND "
+   search_string = search_string || " CUST_STATE LIKE "     || "'" || cust.state||'%'|| "'"
+end
+if length(cust.zip) > 0 then do
+   if length(search_string) > 0 then
+      search_string = search_string || " AND "
+   search_string = search_string || " CUST_ZIP LIKE "    || "'" || cust.zip||'%'|| "'"
+end
+if length(cust.country) > 0 then do
+   if length(search_string) > 0 then
+      search_string = search_string || " AND "
+   search_string = search_string || " CUST_COUNTRY LIKE "   || "'" || cust.country||'%'|| "'"
+end
+if length(cust.phone) > 0 then do
+   if length(search_string) > 0 then
+      search_string = search_string || " AND "
+   search_string = search_string || " CUST_PHONE LIKE "  || "'" || cust.phone||'%'|| "'"
+end
+
+if length(search_string) > 0 then
+   prep_string=prep_string||" WHERE "|| search_string
+
+/* Declare The Dynamic SQL Cursor */
+call sqlexec 'DECLARE c1 CURSOR FOR s1';
+
+call sqlexec 'PREPARE s1 FROM :prep_string';
+if ( SQLCA.SQLCODE <> 0) then do
+     response=VpMessageBox(window,TITLE,'Query of customer record failed. 'SQLCA.SQLMSG)
+     ret = SQLCA.SQLCODE
+end
+else do
+   call sqlexec 'OPEN c1';
+
+   /* Retrieve Data From The Cursor And Display It */
+   cmd_string = "FETCH c1 INTO ",
+      ":cust.customer_id, ",
+      ":cust.name, ",
+      ":cust.company, ",
+      ":cust.address, ",
+      ":cust.city, ",
+      ":cust.state, ",
+      ":cust.zip, ",
+      ":cust.country, ",
+      ":cust.phone"
+
+
+   do while (SQLCA.SQLCODE = 0)
+      call sqlexec cmd_string;
+
+      if ( SQLCA.SQLCODE <> 0) & (SQLCA.SQLCODE <> 100) then do
+           response=VpMessageBox(window,MSGTITLE,'Query of customer record failed. 'SQLCA.SQLMSG)
+           ret = SQLCA.SQLCODE
+      end
+
+      if ( SQLCA.SQLCODE = 0) then do
+         value=LEFT(STRIP(cust.name),25)||' '||LEFT(cust.company,25)
+         value = value||' '||LEFT(cust.customer_id,10)
+         /* Add item sorted descending CUSTLIST List Box */
+         CALL VpAddItem window,'CUSTLIST','ASCENDING',value
+      end
+   end
+end
+
+call sqlexec 'CLOSE c1';
+
+/* Stop Using The Database */
+call sqldbs 'STOP USING DATABASE';
+
+if (SQLCA.SQLCODE <> 0) then do
+    response=VpMessageBox(window,TITLE,'STOP USING DATABASE Error :  SQLCODE = ' SQLCA.SQLCODE)
+    ret = SQLCA.SQLCODE
+end
+
+
+/* Add item to location at CUSTLIST List Box */
+CALL VpAddItem window,'CUSTLIST',0,'<NEW CUSTOMER>'
+
+/* Select item CUSTLIST List Box */
+CALL VpSelect window,'CUSTLIST',1,1
+
+/* Painting enable CUSTLIST List Box */
+CALL VpItem window,'CUSTLIST','ENABLEPAINT'
+
+return ret
+

@@ -1,0 +1,6 @@
+Arg window self
+
+/* Convert to B/W  Image Editor */
+CALL VpImgEdt window, 1010, 'CONVERTTOBW'
+if attrwin<>0 then
+    call setattrs	

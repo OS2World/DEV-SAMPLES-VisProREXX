@@ -1,0 +1,4 @@
+Arg window self
+
+/* Rotate 90 degrees  Image Editor */
+CALL VpImgEdt window, 1010, 'ROTATE90'

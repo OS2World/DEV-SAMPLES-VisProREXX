@@ -1,0 +1,17 @@
+Arg window
+
+ascii=0
+
+DO row = 1 to 15 by 1
+  DO column = 1 to 17 by 1
+    /* Set cell value  Value Set */
+    CALL VpSetItemValue window,1000,d2c(ascii),row,column
+    ascii=ascii+1
+  END
+END
+
+/* Set item foreground color  Value Set */
+CALL VpItem window,1000,'FORECOLOR','BLACK'
+/* Set item background color  Value Set */
+CALL VpItem window,1000,'BACKCOLOR','WHITE'
+

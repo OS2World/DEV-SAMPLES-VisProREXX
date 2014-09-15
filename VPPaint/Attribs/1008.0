@@ -1,0 +1,19 @@
+Arg window self
+
+/* Get item value  Spin Button */
+x = VpGetItemValue(window,1004)
+/* Get item value  Spin Button */
+y = VpGetItemValue(window,1005)
+
+/* Get button state ~1 Radio Button */
+flag = VpIsSelected(window,1000)
+if flag==1 then numcolors=2
+else do
+   /* Get button state ~4 Radio Button */
+   flag = VpIsSelected(window,1001)
+   if flag==1 then numcolors=16
+   else
+      numcolors=256 
+end
+/* Set image attributes  Image Editor */
+CALL VpImgEdt mainwin, 1010, 'SETBMPATTRIBUTES', x, y, numcolors

@@ -1,0 +1,10 @@
+Arg window self
+
+/* Get button state ~Show grid Check Box */
+flag = VpIsSelected(window,1000)
+if flag==1 then
+   /* Show grid  Image Editor */
+   CALL VpImgEdt mainwin, 1010, 'SHOWGRID'
+else
+   /* Hide grid  Image Editor */
+   CALL VpImgEdt mainwin, 1010, 'HIDEGRID'

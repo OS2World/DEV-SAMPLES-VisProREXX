@@ -1,0 +1,17 @@
+/* Event Clicked/selected - Advise ADVISEPB */
+Arg window self
+
+/* Get item value ITEMNAME Entry Field */
+value = VpGetItemValue(window,'ITEMNAME')
+
+/* Advise DDECLIENT DDE Client */
+rc=VpDDECLT(mainwindow, 'DDECLIENT', 'REQUEST',value,'ADVISE')
+
+/* Request data DDECLIENT DDE Client */
+value=VpDDECLT(mainwindow, 'DDECLIENT', 'REQUEST',value)
+
+/* Set item value RESULTS Multi-Line Entry Field */
+CALL VpSetItemValue window,'RESULTS',value
+
+
+

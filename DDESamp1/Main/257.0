@@ -1,0 +1,27 @@
+/* Event Clicked/selected - Paste link PASTEPB */
+Arg window self
+
+/* Get server handle DDECLIENT DDE Client */
+value=VpDDECLT(window, 'DDECLIENT', 'GETSERVER')
+
+/* Get clipboard link data DDECLIENT DDE Client */
+value=VpDDECLT(window, 'DDECLIENT', 'GETCLIPBRDLINK')
+
+Parse Var value with +0 appName '00'x topicName '00'x itemName '00'x
+
+if appName<>'' then do
+   /* Initiate conversation DDECLIENT DDE Client */
+   rc=VpDDECLT(window, 'DDECLIENT', 'INITIATE',appName,topicName)
+
+   /* Advise DDECLIENT DDE Client */
+   rc=VpDDECLT(window, 'DDECLIENT', 'REQUEST',itemName,'ADVISE')
+
+   /* Request data DDECLIENT DDE Client */
+   value=VpDDECLT(window, 'DDECLIENT', 'REQUEST',itemName)
+   
+   /* Set item value ITEMNAME Entry Field */
+   CALL VpSetItemValue window,'ITEMNAME',itemName
+
+end   
+else
+   response=VpMessageBox(window,'DDE Client Sample','There is no DDE link in the clipboard.  To establish one, go to a DDE enabled application, select an item, and copy it to the clipboard.  Then select the Paste Link button in this sample again.')

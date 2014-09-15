@@ -1,0 +1,14 @@
+Arg window self
+
+/* Get button state Bitmap Radio Button */
+bitmap = VpIsSelected(window,1002)
+
+if bitmap then
+  ext = '*.bmp'
+else
+  ext = '*.ico'
+  
+filename = VpFileDialog(window,'OPEN',ext,'Find Resource File')
+
+/* Set item value  Entry Field */
+CALL VpSetItemValue window,1001,filename

@@ -1,0 +1,25 @@
+Arg window self
+
+/* file holds the path to the bitmap/pointer */
+/* flag will tell whether you are adding or changing the object */
+/* selection determines wheter it is a bitmap or a pointer resource */
+
+/* Get item value  Entry Field */
+file = VpGetItemValue(window,1001)
+if file = '' then
+  return
+  
+/* Get button state Bitmap Radio Button */
+selection = VpIsSelected(window,1002)
+
+if selection then
+  resource = 'Bitmap'
+else 
+  resource = 'Pointer'  
+
+CALL VpNotify window,file || ' ' || resource || ' ' || flag
+
+
+/* if you are changing an item, exit window when changed */
+if flag then
+  CALL VpWindow window,'CLOSE'

@@ -1,0 +1,41 @@
+/*******************************/
+/* Change customer information */
+/*******************************/
+Arg window
+ret=0
+
+/* Start Using The Database */
+call sqldbs 'START USING DATABASE dbsample IN SHARED MODE';
+if (SQLCA.SQLCODE <> 0) then do
+    response=VpMessageBox(window,TITLE,'START USING DATABASE Error :  SQLCODE = ' SQLCA.SQLCODE)
+    return SQLCA.SQLCODE
+end
+
+/* Create The SQL Update Statement and update the record */
+prep_string = "UPDATE userid.customer SET ",
+   "CUST_CUSTOMER_ID = " || cust.customer_id || ", ",
+   "CUST_NAME = " || "'" || cust.name || "'" || ", ",
+   "CUST_COMPANY = " || "'" || cust.company || "'" || ", ",
+   "CUST_ADDRESS = " || "'" || cust.address || "'" || ", ",
+   "CUST_CITY = " || "'" || cust.city || "'" || ", ",
+   "CUST_STATE = " || "'" || cust.state || "'" || ", ",
+   "CUST_ZIP = " || "'" || cust.zip || "'" || ", ",
+   "CUST_COUNTRY = " || "'" || cust.country || "'" || ", ",
+   "CUST_PHONE = " || "'" || cust.phone || "'",
+   " WHERE CUST_CUSTOMER_ID = " || cust.customer_id
+
+call sqlexec 'EXECUTE IMMEDIATE :prep_string';
+if ( SQLCA.SQLCODE <> 0) then do
+   response=VpMessageBox(window,TITLE,'Error updating customer record. 'SQLCA.SQLMSG)
+   ret=1
+end
+
+/* Stop Using The Database */
+call sqldbs 'STOP USING DATABASE';
+if (SQLCA.SQLCODE <> 0) then do
+    response=VpMessageBox(window,TITLE,'STOP USING DATABASE Error :  SQLCODE = ' SQLCA.SQLCODE)
+    return SQLCA.SQLCODE
+end
+
+return ret
+

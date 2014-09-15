@@ -1,0 +1,21 @@
+Arg window self
+
+/* Set item value CUSTNUM Entry Field */
+CALL VpSetItemValue window,'CUSTNUM',''
+/* Set item value NAME Entry Field */
+CALL VpSetItemValue window,'NAME',''
+/* Set item value FIRM Entry Field */
+CALL VpSetItemValue window,'FIRM',''
+/* Set item value ADDRESS Entry Field */
+CALL VpSetItemValue window,'ADDRESS',''
+/* Set item value CITY Entry Field */
+CALL VpSetItemValue window,'CITY',''
+/* Set item value STATE Entry Field */
+CALL VpSetItemValue window,'STATE',''
+/* Set item value COUNTRY Entry Field */
+CALL VpSetItemValue window,'COUNTRY',''
+/* Set item value ZIP Entry Field */
+CALL VpSetItemValue window,'ZIP',''
+/* Set item value PHONE Entry Field */
+CALL VpSetItemValue window,'PHONE',''
+

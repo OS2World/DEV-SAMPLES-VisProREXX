@@ -1,0 +1,36 @@
+procedure
+parse upper arg window id type chk_index
+
+i = 1
+object. = ''
+
+/* Get index of first item  Container */
+index=VpGetIndex(window,1000,'NEXT',0)
+
+do while index <> 0
+  if index <> chk_index then
+  do
+    /* Get item columns at index  Container */
+    /* COLUMNS.0 - count */
+    /* COLUMNS.n - nth columns */
+    CALL VpGetItemValue window,1000,'DETAILS','COLUMNS.',index
+    if columns.2 = type then
+    do
+      object.i = columns.1
+      i = i + 1
+    end
+  end
+  /* Get index of next item  Container */
+  index=VpGetIndex(window,1000,'NEXT',index)
+end
+
+do j = 1 to i by 1
+  if object.j = id then
+  do
+    id = id(window type)
+    response=VpMessageBox(window,'Notice','A duplicate resource id was found and changed.')
+  end
+end
+
+return id
+

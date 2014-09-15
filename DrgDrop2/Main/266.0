@@ -1,0 +1,22 @@
+Arg window self
+
+/* Get index of first item  Container */
+index=VpGetIndex(window,1000,'NEXT',0)
+rc=SysFileDelete(topic)
+if assoc.1<> 0 then do
+   rc = lineout(topic,'ASSOCTABLE 256')
+   rc = lineout(topic,'BEGIN')
+   rc = lineout(topic,'  "'assoc.1'","'assoc.2'",1,'assoc.4)
+   rc = lineout(topic,'END')
+end
+do while index <> 0
+  /* Get item columns at index  Container */
+  /* COLUMNS.0 - count */
+  /* COLUMNS.n - nth columns */
+  CALL VpGetItemValue window,1000,'DETAILS','COLUMNS.',index
+  rc = lineout(topic,columns.2|| '   ' || columns.1 || '   ' || columns.3)
+  /* Get index of next item  Container */
+  index=VpGetIndex(window,1000,'NEXT',index)
+end
+rc=lineout(topic)
+changed=0

@@ -1,0 +1,16 @@
+/**/
+arg importfile
+
+IF LENGTH(importfile) > 0 THEN DO
+  value=''
+  DO WHILE LINES(importfile)
+    value=value||crlf||LINEIN(importfile)
+  END
+  /* Add item at current location 1000 Multi-Line Entry Field */
+  CALL VpAddItem window, 1000, 'CURRENT', value
+
+  rc=stream(importfile,'c','close')
+END
+
+
+

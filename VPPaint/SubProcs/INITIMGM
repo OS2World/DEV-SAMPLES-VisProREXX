@@ -1,0 +1,21 @@
+/* init the image menu item states */
+arg window
+
+/* Set changed flag  Image Editor */
+value=VpImgEdt(window, 1010, 'GETCHANGED')
+if value==0 then
+   /* Disable item ~Save Menu Item */
+   CALL VpItem window,258,'DISABLE'
+else
+   /* Enable item ~Save Menu Item */
+   CALL VpItem window,258,'ENABLE'
+
+/* Get image attributes  Image Editor */
+rc=VpImgEdt(window, 1010, 'GETBMPATTRIBUTES')
+PARSE VAR rc x y numcolors
+if numcolors<>2 then 
+   /* Enable item Convert to ~B/W Menu Item */
+   CALL VpItem window,279,'ENABLE'
+else
+   /* Disable item Convert to ~B/W Menu Item */
+   CALL VpItem window,279,'DISABLE'

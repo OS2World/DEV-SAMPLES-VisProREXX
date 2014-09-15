@@ -1,0 +1,5 @@
+/* Menu events - help ~index... */
+Arg window self
+
+CALL VpWindow window, 'HELPINDEX'
+

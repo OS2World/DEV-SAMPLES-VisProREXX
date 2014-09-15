@@ -1,0 +1,5 @@
+/* Event Clicked/selected - Poke...  1005 */
+Arg window self
+
+/* Open the form C:\DESKTOP1\DDE\POKE */
+value=VpOpenForm(window, 258, 'topic name')

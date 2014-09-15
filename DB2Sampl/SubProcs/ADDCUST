@@ -1,0 +1,50 @@
+/****************************/
+/* Add customer information */
+/****************************/
+Arg window
+ret=0
+
+/* Connect to Database */
+call sqldbs 'START USING DATABASE dbsample IN SHARED MODE';
+if (SQLCA.SQLCODE <> 0) then do
+    response=VpMessageBox(window,TITLE,'START USING DATABASE Error :  SQLCODE = ' SQLCA.SQLCODE)
+    response=VpMessageBox(window,TITLE,'Refer to the comment in the "When opened" event for information on how to create the database used by this program.')
+    return SQLCA.SQLCODE
+end
+
+/* Get next unique customer number */
+temp = get_max(window "userid.customer" "CUST_CUSTOMER_ID")
+
+if temp > 0 then do
+   cust.customer_id = temp;
+
+   /* Create The SQL Insert Statement  and insert the record */
+   prep_string = "INSERT INTO userid.customer VALUES (",
+        cust.customer_id ",",
+        "'" || cust.name || "'" || ",",
+        "'" || cust.company || "'" || ",",
+        "'" || cust.address || "'" || ",",
+        "'" || cust.city || "'" || ",",
+        "'" || cust.state || "'" || ",",
+        "'" || cust.zip || "'" || ",",
+        "'" || cust.country || "'" || ",",
+        "'" || cust.phone || "'" || ")";
+
+   call sqlexec 'EXECUTE IMMEDIATE :prep_string';
+   if ( SQLCA.SQLCODE <> 0) then do
+      response=VpMessageBox(window,TITLE,'Error adding customer record.' SQLCA.SQLMSG )
+      ret = SQLCA.SQLCODE
+   end
+end
+   else
+   ret = 1
+
+/* Stop Using The Database */
+call sqldbs 'STOP USING DATABASE';
+if (SQLCA.SQLCODE <> 0) then do
+    response=VpMessageBox(window,TITLE,'STOP USING DATABASE Error :  SQLCODE = ' SQLCA.SQLCODE)
+    ret = SQLCA.SQLCODE
+end
+
+return ret
+

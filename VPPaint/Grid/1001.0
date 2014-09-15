@@ -1,0 +1,11 @@
+Arg window self
+
+/* Get button state Snap to grid Check Box */
+flag = VpIsSelected(window,1001)
+if flag==1 then
+   /* Set grid off  Image Editor */
+   CALL VpImgEdt mainwin, 1010, 'SETGRIDON'
+else
+   /* Set grid on  Image Editor */
+   CALL VpImgEdt mainwin, 1010, 'SETGRIDOFF'
+

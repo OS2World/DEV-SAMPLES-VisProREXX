@@ -1,0 +1,20 @@
+Arg window 
+
+/* Get changed flag  Image Editor */
+value=VpImgEdt(window, 1010, 'GETCHANGED')
+if value<> 0 then do
+   response=VpMessageBox(window,prodname,'Save your changes?','YESNO')
+   if response=='YES' then do
+      if length(imagefile)>0 then do
+            if compress then
+               /* Save image with compression  Image Editor */
+               CALL VpImgEdt window, 1010, 'SAVECOMPRESSED', imagefile
+            else
+               /* Save to file  Image Editor */
+               CALL VpImgEdt window,1010,'SAVE',imagefile
+      end
+      else
+         /* Select item Save ~as... Menu Item */
+         CALL VpSelect window,262
+   end
+end   

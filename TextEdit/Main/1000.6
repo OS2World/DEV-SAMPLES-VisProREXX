@@ -1,0 +1,26 @@
+/* Event Drag drop -   1000 */
+Arg window self
+
+parse upper var vpdropinfo.1.4 drop_file
+parse upper var vpdropinfo.1.3 drop_directory
+
+
+
+/* is the source file the file that the editor creates? */
+if vpdropinfo.1.4=drg_file then do
+  /* are you doing a copy or a move? */
+  if vpdropinfo.2='MOVE' then
+    /* Delete range 1000 Multi-Line Entry Field */
+    rc=VpItem(window,1000,'SENDMSG','0x01c6',first,last-first)
+  parse value vpitem(window,1000,'MOUSEPOS') with x y
+  /* Mouse button 1 down */
+  rc=VpItem(window,1000,'SENDMSG','0x0071',x, y,'0','0')
+  /* Mouse button 1 up */
+  rc=VpItem(window,1000,'SENDMSG','0x0072',x,y,'0','0')
+  rc=set(value)
+end
+
+else 
+  call import vpdropinfo.1.3||vpdropinfo.1.4
+
+rc=SysFileDelete(drive||drg_file)

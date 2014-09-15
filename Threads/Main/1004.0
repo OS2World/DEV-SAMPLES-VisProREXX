@@ -1,0 +1,7 @@
+Arg window self
+
+/* Get item value  Entry Field */
+value = VpGetItemValue(window,1005)
+value=value+1
+/* Set item value  Entry Field */
+CALL VpSetItemValue window,1005,value

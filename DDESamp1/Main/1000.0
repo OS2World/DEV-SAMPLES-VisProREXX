@@ -1,0 +1,9 @@
+/* Event Advise notification - No active conversation DDECLIENT */
+Arg window self
+
+   /* Get notify value DDECLIENT DDE Client */
+   rc=VpDDECLT(window, 'DDECLIENT', 'GETNOTIFYVALUE','NOT.')
+   /* NOT.1 - item name, NOT.2 - item value */
+
+   /* Set item value RESULTS Multi-Line Entry Field */ 
+   CALL VpSetItemValue window,'RESULTS',not.2

@@ -1,0 +1,4 @@
+Arg window self
+
+/* Crop  Image Editor */
+CALL VpImgEdt window, 1010, 'CROP'

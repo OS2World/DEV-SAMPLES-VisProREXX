@@ -1,0 +1,13 @@
+Arg window self
+
+/* Get item value  Value Set */
+value = VpGetItemValue(window,1000)
+/* Set item value  Entry Field */
+CALL VpSetItemValue window,1001,value
+/* Set item value  Entry Field */
+CALL VpSetItemValue window,1002,C2D(value)
+/* Set item value  Entry Field */
+CALL VpSetItemValue window,1003,C2X(value)
+/* Set item value  Entry Field */
+CALL VpSetItemValue window,1004,X2B(C2X(value))
+

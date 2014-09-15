@@ -1,0 +1,18 @@
+Arg window 
+
+if assoc.1<>0 then do
+   /* Set item value TEMPLATE Entry Field */ 
+   CALL VpSetItemValue window,'TEMPLATE',assoc.1
+   /* Set item value WILDCARD Entry Field */ 
+   CALL VpSetItemValue window,'WILDCARD',assoc.2
+   /* Set item value ICONNAME Entry Field */ 
+   CALL VpSetItemValue window,'ICONNAME',assoc.4
+end
+else do
+   /* Set item value TEMPLATE Entry Field */ 
+   CALL VpSetItemValue window,'TEMPLATE','MYFILETYPE.EXT'
+   /* Set item value WILDCARD Entry Field */ 
+   CALL VpSetItemValue window,'WILDCARD','*.EXT'
+   /* Set item value ICONNAME Entry Field */ 
+   CALL VpSetItemValue window,'ICONNAME','MYICON.ICO'
+end

@@ -1,0 +1,34 @@
+Arg window self
+
+/* Is overview showing  Image Editor */
+value=VpImgEdt(window, 1010, 'ISOVERVIEW')
+IF value = 0 THEN
+   DO
+      /* Check the item  ~Overview259 Menu Item */
+      CALL VpSelect window,259,0
+   END
+ELSE
+   DO
+      /* Check the item  ~Overview259 Menu Item */
+      CALL VpSelect window,259,1
+   END
+
+IF toolwin = 0 THEN
+   DO
+      /* Uncheck the item ~Tool palette260 Menu Item */
+      CALL VpSelect window,260,0
+   END
+ELSE
+   DO
+      /* Check the item  ~Tool palette260 Menu Item */
+      CALL VpSelect window,260,1
+   END
+
+/* Get zoom level  Image Editor */
+value=VpImgEdt(window, 1010, 'GETZOOM')
+IF value = 65536 THEN
+   /* Check the item  ~Actual size Menu Item */
+   CALL VpSelect window,285,1
+ELSE
+   /* Uncheck the item ~Actual size Menu Item */
+   CALL VpSelect window,285,0

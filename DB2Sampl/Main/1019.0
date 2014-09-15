@@ -1,0 +1,17 @@
+Arg window self
+
+/* Get customer information */
+call getcust(window)
+
+/* Create customer */
+rc=addcust(window)
+
+if rc=0 then do
+   value=LEFT(STRIP(cust.name),25)||' '||LEFT(cust.company,25)
+   value = value||' '||LEFT(cust.customer_id,10)
+   /* Add item to CUSTLIST List Box */
+   CALL VpAddItem window,'CUSTLIST',1,value
+   /* Select item CUSTLIST List Box */
+   CALL VpSelect window,'CUSTLIST',1,1
+end
+

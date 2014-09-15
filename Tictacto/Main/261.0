@@ -1,0 +1,24 @@
+/* Menu events - New Game 	 Alt-n */
+Arg window self
+
+
+clear_board:
+row=0
+column=0
+selections=0
+/* Painting disable 1000 Value Set */
+CALL VpItem window,1000,'DISABLEPAINT'
+
+Do row=1 to 3
+   do column=1 to 3
+      /* Set cell value 1000 Value Set */
+      CALL VpSetItemValue window,1000,'',row,column
+   end
+end   
+
+/* Painting enable 1000 Value Set */
+CALL VpItem window,1000,'ENABLEPAINT'
+/* Repaint item 1000 Value Set */
+rc=VpItem(window,1000,'PAINT')
+SELECTED_CELLS.=''
+return

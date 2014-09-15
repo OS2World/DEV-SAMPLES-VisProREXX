@@ -1,0 +1,10 @@
+Arg window self
+
+/* Is overview showing 1010 Image Editor */
+value=VpImgEdt(window, 1010, 'ISOVERVIEW')
+if value==0 then
+   /* Show overview  Image Editor */
+   CALL VpImgEdt window,1010,'SHOWOVERVIEW'
+else
+   /* Hide overview 1010 Image Editor */
+   CALL VpImgEdt window, 1010, 'HIDEOVERVIEW'

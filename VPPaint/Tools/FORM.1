@@ -1,0 +1,36 @@
+/* Form events - Opened */
+Arg window 
+
+index=1
+contin=1
+row=1
+column=1
+xx=0
+x=1111
+xsize=42
+ysize=50
+y=7*ysize
+do index=1 to 14
+   if x=xx then
+      x=xx+xsize
+   else
+     do
+      x=xx
+      y=y-ysize
+     end 
+
+   /* Get tool icon  Image Editor */
+   value=VpImgEdt(mainwin,1010,'GETTOOLICON',index)
+   /* Set item value Select1000 Push Button */
+   CALL VpSetItemValue window,1000+index-1,value
+   /* Set item position/size Select1000 Push Button */
+   CALL VpItem window,1000+index-1,'SETITEMPOS',x,y,xsize,ysize
+end
+/* Get tool icon  Image Editor */
+value=VpImgEdt(mainwin,1010,'GETTOOLICON',1)
+/* Set item value Select1000 Push Button */
+CALL VpSetItemValue window,1000,value
+
+xy=VpWindow(window,'GETPOS')
+PARSE VAR xy x y
+CALL VpWindow window,'SETPOS', x, y, xsize*2+10, ysize*7+32

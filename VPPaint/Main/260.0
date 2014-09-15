@@ -1,0 +1,8 @@
+Arg window self
+
+if toolwin==0 then
+   /* Open the form I:\PROJECTS\PAINT\Tools */
+   toolwin=VpOpenForm(window, 262, 'topic name')
+else
+   CALL VpWindow toolwin,'CLOSE'
+

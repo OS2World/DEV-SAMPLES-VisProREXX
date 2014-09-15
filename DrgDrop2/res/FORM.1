@@ -1,0 +1,22 @@
+Arg window 
+
+/* flag will determine wheter you are changing or adding a resource */
+
+if topic <> '' then
+do
+  /* Set item value ~Add Push Button */
+  CALL VpSetItemValue window,1004,'~Change'
+  /* Set item value  Entry Field */
+  CALL VpSetItemValue window,1001,topic
+  parse var topic '.' ext
+  if ext = 'ICO' then
+    /* Check the item  Icon Radio Button */
+    CALL VpSelect window,1003,1
+  else
+    /* Check the item  Resource Radio Button */
+    CALL VpSelect window,1002,1
+  flag = 1
+end
+else 
+  flag = 0
+

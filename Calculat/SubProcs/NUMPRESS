@@ -1,0 +1,25 @@
+Arg window self
+
+/* Get item value  Entry Field */
+value = VpGetItemValue(window,1001)
+if oper='=' then do
+   value='0'
+   oper=0
+end
+else if oper<>0 & tabul=0 then do
+   tabul=value
+   value='0'
+end
+
+/* Get item value  self */
+value2 = VpGetItemValue(window,self)
+if value2='.' & POS('.',value)<>0 THEN
+   /* 1000 Hz for 25 millisec */
+   CALL VpBeep 2000,125
+else if value<>'0' | value2='.' | (value='0' & POS('.',value)<>0) then
+   value = VALUE(value)VALUE(value2)
+else
+   value=value2
+/* Set item value  Entry Field */
+CALL VpSetItemValue window,1001,value
+

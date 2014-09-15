@@ -1,0 +1,15 @@
+Arg window
+
+/* Open the form C:\UCANDUVP\PROJECTS\MYMLS\InfoPage*/
+value=VpOpenForm(window, 258, topic)
+/* Add notebook page  Notebook */
+CALL VpAddItem window,1000, '~Details', value
+/* Open the form C:\UCANDUVP\PROJECTS\MYMLS\PhotoPag*/
+value=VpOpenForm(window, 259, 'house.bmp')
+/* Add notebook page  Notebook */
+CALL VpAddItem window,1000, '~Photo', value
+/* Open the form C:\UCANDUVP\PROJECTS\MYMLS\PhotoPag*/
+value=VpOpenForm(window, 259, 'floorpln.bmp')
+/* Add notebook page  Notebook */
+CALL VpAddItem window,1000, '~Floor plan', value
+

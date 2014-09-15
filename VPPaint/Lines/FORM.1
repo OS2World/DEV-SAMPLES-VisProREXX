@@ -1,0 +1,15 @@
+Arg window 
+
+/* Get line end size  Image Editor */
+value=VpImgEdt(mainwin, 1010, 'GETLINEENDSIZE')
+/* Set range  Spin Button */
+CALL VpSetRange window,1001,4,30  /* Set spin button range*/
+/* Set item value  Spin Button */
+CALL VpSetItemValue window,1001,value
+
+/* Get line width  Image Editor */
+value=VpImgEdt(mainwin, 1010, 'GETLINEWIDTH')
+/* Set range  Spin Button */
+CALL VpSetRange window,1006,1,10  /* Set spin button range*/
+/* Set item value  Spin Button */
+CALL VpSetItemValue window,1006,value

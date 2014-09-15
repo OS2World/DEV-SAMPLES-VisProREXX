@@ -1,0 +1,21 @@
+Arg window 
+
+/* Open the form D:\VISPRORX\PROJECTS\PAINT\Colors*/
+value=VpOpenForm(window, 261, 'topic name')
+/* Add notebook page with major tab  Notebook */
+CALL VpAddItem window, 1000, '~Color/Fill', value
+
+/* Open the form D:\VISPRORX\PROJECTS\PAINT\Attribs*/
+value=VpOpenForm(window, 260, 'topic name')
+/* Add notebook page with major tab  Notebook */
+CALL VpAddItem window, 1000, '~Attributes', value
+
+/* Open the form D:\VISPRORX\PROJECTS\PAINT\Grid*/
+value=VpOpenForm(window, 257, 'topic name')
+/* Add notebook page with major tab  Notebook */
+CALL VpAddItem window, 1000, '~Grid', value
+
+/* Open the form D:\VISPRORX\PROJECTS\PAINT\Lines*/
+value=VpOpenForm(window, 259, 'topic name')
+/* Add notebook page with major tab  Notebook */
+CALL VpAddItem window, 1000, '~Line styles', value

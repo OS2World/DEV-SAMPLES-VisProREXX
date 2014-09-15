@@ -1,0 +1,5 @@
+/**/
+parse arg value
+  /* Add item at current location 1000 Multi-Line Entry Field */
+  CALL VpAddItem window, 1000, 'CURRENT', value
+return 1

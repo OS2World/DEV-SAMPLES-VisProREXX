@@ -1,0 +1,8 @@
+/* Event Clicked/selected - Execute EXECUTEPB */
+Arg window self
+
+/* Get item value 1003 Entry Field */
+value = VpGetItemValue(window,1003)
+
+/* Execute DDECLIENT DDE Client */
+rc=VpDDECLT(mainwindow, 'DDECLIENT', 'EXECUTE',value)

@@ -1,0 +1,6 @@
+/* Menu events - ~Save	F2 */
+Arg window self
+
+
+call save_fil
+ 

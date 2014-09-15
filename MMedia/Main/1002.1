@@ -1,0 +1,14 @@
+Arg window self
+
+/* Get button state Enable ~audio Check Box */
+flag = VpIsSelected(window,1007)
+IF flag = 1 THEN
+   DO
+      /* Get value  Circular Slider */
+      value=VpDial(window, 1002, 'GETVALUE')
+      /* Movie - set volume  MMPM/2 Video Window */
+      CALL VpVideo window, 1000, 'VOLUME', value
+   END
+
+
+

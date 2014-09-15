@@ -1,0 +1,4 @@
+Arg window self
+
+/* Flip horizontally  Image Editor */
+CALL VpImgEdt window, 1010, 'FLIPHORZ'

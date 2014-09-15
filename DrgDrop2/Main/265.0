@@ -1,0 +1,14 @@
+Arg window self
+
+/* Get indexes of all selected items  Container */
+CALL VpGetIndex window,1000,'ALLSELECTED','INDEXES.'
+
+response=VpMessageBox(window,'Warning','Are you sure you want to delete the selected file? ','YESNO')
+
+if response = 'YES' then
+  do i = 1 to indexes.0 by 1
+    /* Delete a list item  Container */
+    CALL VpDeleteItem window,1000,indexes.i
+    changed=1
+  end
+

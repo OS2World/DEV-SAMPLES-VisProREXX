@@ -1,0 +1,19 @@
+Arg window self
+
+/* Get index of first selected value  Container */
+index=VpGetIndex(window,1000,'SELECTED',0)
+
+if index <> 0 then
+DO
+  /* Get item columns at index  Container */
+  /* COLUMNS.0 - count */
+  /* COLUMNS.n - nth columns */
+  CALL VpGetItemValue window,1000,'DETAILS','COLUMNS.',index
+  
+  if columns.2 = 'BITMAP' then
+    resource_format = 'RESBMP'
+  else
+    resource_format = 'RESICON'
+
+  CALL VpWindow window,'SETCLIPBOARD','TEXT','value = VpLoadPicture('''resource_format''', 'columns.1')'
+end

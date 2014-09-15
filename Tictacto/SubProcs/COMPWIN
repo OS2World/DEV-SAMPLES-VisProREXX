@@ -1,0 +1,93 @@
+arg window
+winrow=0
+wincolumn=0
+win=0
+win1.=''
+
+
+do i=1 to 3
+  do x = 1 to 3
+     win1.i.x=selected_cells.i.x
+  end /* end do */
+end /* end do */
+
+
+
+if win1.1.1=win1.1.2 & win1.1.3='' & win1.1.1=bmphandle |, 
+  win1.1.2=win1.1.3 & win1.1.1='' & win1.1.2=bmphandle |, 
+  win1.1.1=win1.1.3 & win1.1.2='' & win1.1.1=bmphandle |, 
+  win1.2.1=win1.2.2 & win1.2.3='' & win1.2.1=bmphandle |, 
+  win1.2.2=win1.2.3 & win1.2.1='' & win1.2.2=bmphandle |,
+  win1.2.1=win1.2.3 & win1.2.2='' & win1.2.1=bmphandle |,
+  win1.3.1=win1.3.2 & win1.3.3='' & win1.3.1=bmphandle |,
+  win1.3.2=win1.3.3 & win1.3.1='' & win1.3.2=bmphandle |,
+  win1.3.1=win1.3.3 & win1.3.2='' & win1.3.1=bmphandle |, 
+  win1.1.1=win1.2.1 & win1.3.1='' & win1.1.1=bmphandle |,
+  win1.2.1=win1.3.1 & win1.1.1='' & win1.2.1=bmphandle |,
+  win1.1.1=win1.3.1 & win1.2.1='' & win1.1.1=bmphandle |,
+  win1.1.2=win1.2.2 & win1.3.2='' & win1.1.2=bmphandle |,
+  win1.2.2=win1.3.2 & win1.1.2='' & win1.2.2=bmphandle |,
+  win1.1.2=win1.3.2 & win1.2.2='' & win1.1.2=bmphandle |,
+  win1.1.3=win1.2.3 & win1.3.3='' & win1.1.3=bmphandle |,
+  win1.2.3=win1.3.3 & win1.1.3='' & win1.2.3=bmphandle |,
+  win1.1.3=win1.3.3 & win1.2.3='' & win1.1.3=bmphandle |, 
+  win1.1.1=win1.2.2 & win1.3.3='' & win1.1.1=bmphandle  & win1.2.2<>''  |,
+  win1.1.1=win1.3.3 & win1.2.2='' & win1.3.3=bmphandle  & win1.1.1<>''  |,
+  win1.2.2=win1.3.3 & win1.1.1='' & win1.2.2=bmphandle  & win1.3.3<>''  |,
+  win1.1.3=win1.2.2 & win1.3.1='' & win1.1.3=bmphandle  & win1.2.2<>''  |,
+  win1.1.3=win1.3.1 & win1.2.2='' & win1.3.1=bmphandle  & win1.1.3<>''  |,
+  win1.2.2=win1.3.1 & win1.1.3='' & win1.2.2=bmphandle  & win1.3.1<>''  then
+    do 
+
+
+        do i = 1 to 3
+          do x = 1 to 3
+            if  win <> 1 &  win1.i.x=''  & win1.i.1=win1.i.2 & win1.i.1=bmphandle |,
+              win <> 1 & win1.i.x='' & win1.i.3=win1.i.1 & win1.i.3=bmphandle |,
+ 	      win <> 1 & win1.i.x='' & win1.i.2=win1.i.3 & win1.i.2=bmphandle |,
+              win <> 1 & win1.i.x='' & win1.1.x=win1.2.x & win1.1.x=bmphandle |,
+	      win <> 1 & win1.i.x='' & win1.1.x=win1.3.x & win1.1.x=bmphandle |,
+	      win <> 1 & win1.i.x='' & win1.2.x=win1.3.x & win1.3.x=bmphandle |,
+	      win <> 1 & win1.i.x='' & win1.1.1=win1.2.2 & win1.1.1=bmphandle & win1.3.3<>user & i=3 & x=3 |,
+	      win <> 1 & win1.i.x='' & win1.2.2=win1.3.3 & win1.3.3=bmphandle & win1.1.1<>user & i=1 & x=1 |,
+	      win <> 1 & win1.i.x='' & win1.1.1=win1.3.3 & win1.3.3=bmphandle & win1.2.2<>user & i=2 & x=2 |,
+	      win <> 1 & win1.i.x='' & win1.1.3=win1.2.2 & win1.2.2=bmphandle & win1.3.1<>user & i=3 & x=1 |,
+	      win <> 1 & win1.i.x='' & win1.3.1=win1.2.2 & win1.2.2=bmphandle & win1.1.3<>user & i=1 & x=3 |,
+	      win <> 1 & win1.i.x='' & win1.3.1=win1.1.3 & win1.1.3=bmphandle & win1.2.2<>user & i=2 & x=2 then        
+                do 
+                  selections=selections+1
+                  /* Set cell value 1000 Value Set */
+                  CALL VpSetItemValue window,1000,bmphandle,i,x
+                  SELECTED_CELLS.i.x=bmphandle 
+                  row=i
+                  column=x
+                  win=1
+                  winrow=i
+                  wincolumn=x
+             
+                  
+                end
+
+    end /* end of do loop */
+  end /* end of do loop */
+      end
+if win=1 then
+           do
+            CALL TEST WINDOW
+            if tst=1 then
+              do
+                call clear_board
+                return
+              end             
+           end                
+            else
+              return
+
+  
+
+
+
+  
+  
+  
+

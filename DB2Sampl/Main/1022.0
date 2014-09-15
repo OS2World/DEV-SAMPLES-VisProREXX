@@ -1,0 +1,8 @@
+Arg window self
+
+/* Get customer information */
+call getcust(window)
+
+/* Search using customer information */
+call srchcust(window)
+

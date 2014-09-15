@@ -1,0 +1,19 @@
+/* Menu events - ~New */
+Arg window self
+
+/* Contents changed? 1000 Multi-Line Entry Field */
+rc=VpItem(window,1000,'SENDMSG','0x01ba')
+if rc=1 then do
+  response=VpMessageBox(window,'Contents Have Changed','The contents have changed, to you want to save before starting a new file?','YESNOCNCL')
+  if response='YES' then 
+    call save_fil
+  else if response='CANCEL' then
+    return 1
+end
+
+/* Set changed flag off 1000 Multi-Line Entry Field */
+rc=VpItem(window,1000,'SENDMSG','0x01bb','0','0')
+/* Set item value 1000 Multi-Line Entry Field */
+CALL VpSetItemValue window,1000,''
+CALL VpWindow window,'SETTITLE',window_title untitled
+filename='untitled'

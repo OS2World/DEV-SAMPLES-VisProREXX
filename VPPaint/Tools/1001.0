@@ -1,0 +1,4 @@
+/* Event Lasso  1001, Clicked/selected */
+Arg window self
+
+CALL VpImgEdt mainwin,1010,'SETTOOL',self-1000+1

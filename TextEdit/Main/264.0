@@ -1,0 +1,4 @@
+/* Menu events - ~Quit	F3 */
+Arg window self
+
+CALL VpWindow window,'CLOSE'

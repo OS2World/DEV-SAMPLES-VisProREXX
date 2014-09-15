@@ -1,0 +1,17 @@
+Arg window self
+
+/* Bring the res window, allowing the user to change the info */
+/* Get item columns at index  Container */
+
+/* Get index of first selected item  Container */
+index=VpGetIndex(window,1000,'SELECTED',0)
+current_index = index
+
+/* COLUMNS.0 - count */
+/* COLUMNS.n - nth columns */
+CALL VpGetItemValue window,1000,'DETAILS','COLUMNS.',index
+
+/* Open the form D:\VISPRORX\PROJECTS\RESOURCE\res*/
+value = VpOpenForm(window, 257, columns.3)
+
+ 

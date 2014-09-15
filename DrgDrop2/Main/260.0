@@ -1,0 +1,29 @@
+Arg window self
+
+/* Get index of next selected item  Container */
+index=VpGetIndex(window,1000,'SELECTED',0)
+
+if index=0 then
+do
+  /* Disable item Delete resource... Menu Item */
+  CALL VpItem window,265,'DISABLE'
+  /* Disable item Change resource... Menu Item */
+  CALL VpItem window,257,'DISABLE'
+  /* Disable item Create Link to ClipBoard Menu Item */
+  CALL VpItem window,256,'DISABLE'
+end
+else
+do
+  /* Enable item Delete resource... Menu Item */
+  CALL VpItem window,265,'ENABLE'
+  /* Enable item Change resource... Menu Item */
+  CALL VpItem window,257,'ENABLE'
+  /* Enable item Create Link to ClipBoard Menu Item */
+  CALL VpItem window,256,'ENABLE'
+  /* Enable item ~Save Menu Item */
+
+end  
+if changed==0 then
+   CALL VpItem window,266,'DISABLE'
+else
+   CALL VpItem window,266,'ENABLE'

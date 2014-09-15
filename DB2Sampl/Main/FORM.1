@@ -1,0 +1,57 @@
+Arg window
+
+/************************************************************/
+/* DATABASE SAMPLE                                          */
+/*                                                          */
+/* This sample program requires the installation of OS/2    */
+/* Database Manager, or DB2/2.                              */
+/*                                                          */
+/* To successfully run this sample you must first create    */
+/* a simple database.  This can be done by using Query      */
+/* Manager, if you desire.                                  */
+/*                                                          */
+/* This program uses a single database called DBSAMPLE with */
+/* the USERID qualification.  There is only one table in    */
+/* this database, with the name CUSTOMER.                   */
+/*                                                          */
+/* The CUSTOMER table used for this example should be       */
+/* created as follows:                                      */
+/*                                                          */
+/*    Column name        Type           Length   Attributes */
+/* ----------------   ----------------  ------   ---------- */
+/* CUST_CUSTOMER_ID   Large Integer               Required  */
+/* CUST_NAME          Character(Fixed)    40      Text      */
+/* CUST_COMPANY       Character(Fixed)    40      Text      */
+/* CUST_ADDRESS       Character(Fixed)    40      Text      */
+/* CUST_CITY          Character(Fixed)    25      Text      */
+/* CUST_STATE         Character(Fixed)    3       Text      */
+/* CUST_ZIP           Character(Fixed)    10      Text      */
+/* CUST_COUNTRY       Character(Fixed)    25      Text      */
+/* CUST_PHONE         Character(Fixed)    15      Text      */
+/*                                                          */
+/************************************************************/
+
+TITLE = 'DataBase Sample'
+CALL VpWindow window,'SETTITLE',TITLE
+
+/* Set item font CUSTLIST List Box */
+CALL VpItem window,'CUSTLIST','FONT','10.System Monospaced'
+
+/* Register The External Routines SQLEXEC (Supports the SQL Language) and  */
+/* SQLDBS (Supports Database Manager Routines)                             */
+rcy = rxfuncadd( 'SQLDBS', 'SQLAR', 'SQLDBS' );
+rcy = rxfuncadd( 'SQLEXEC', 'SQLAR', 'SQLEXEC');
+
+/* Initialize database manager */
+call SQLDBS 'START DATABASE MANAGER'
+
+if SQLCA.SQLCODE <> 0 & SQLCA.SQLCODE<>-1026 then do
+   response=VpMessageBox(window,TITLE,'Error starting DataBase Manager.  SQLCODE = 'SQLCA.SQLCODE'. You need to have DB2/2 installed to run this sample.')
+   CALL VpWindow window,'CLOSE'
+end
+/* Add item sorted ascending CUSTLIST List Box */
+CALL VpAddItem window,'CUSTLIST','ASCENDING','<NEW CUSTOMER>'
+
+/* Select item CUSTLIST List Box */
+CALL VpSelect window,'CUSTLIST',1,1
+

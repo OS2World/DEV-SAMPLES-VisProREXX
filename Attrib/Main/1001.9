@@ -1,0 +1,16 @@
+/* Event Key press - List Box  1001 */
+Arg window self key isChar ctrl shft alt
+
+SELECT
+   WHEN key='A' THEN
+     call pressed window, key, posofa, TOGGLE
+   WHEN key='S' THEN
+     call pressed window, key, posofs, TOGGLE
+   WHEN key='H' THEN
+     call pressed window, key, posofh, TOGGLE
+   WHEN key='R' THEN 
+     call pressed window, key, posofr, TOGGLE
+   OTHERWISE
+END
+
+

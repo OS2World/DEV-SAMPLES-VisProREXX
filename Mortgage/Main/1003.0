@@ -1,0 +1,7 @@
+/*******/
+Parse Arg window self
+
+call calcmort window
+return
+
+

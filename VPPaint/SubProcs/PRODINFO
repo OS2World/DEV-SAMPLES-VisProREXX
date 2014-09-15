@@ -1,0 +1,4 @@
+Arg window
+
+response=VpMessageBox(window,prodname' Product Information',,
+        'This application was created using VisPro/REXX(tm) and the Image Processing Object Pack, both available from HockWare, Inc.')

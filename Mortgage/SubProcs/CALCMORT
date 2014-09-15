@@ -1,0 +1,49 @@
+/* Get item value PRINCIPAL Entry Field */
+principal = VpGetItemValue(window,'PRINCIPAL')
+/* Get item value RATE1 Entry Field */
+rate1 = VpGetItemValue(window,'RATE1')
+/* Get item value RATE2 Entry Field */
+rate2 = VpGetItemValue(window,'RATE2')
+/* Get item value YEARS1 Entry Field */
+years1 = VpGetItemValue(window,'YEARS1')
+/* Get item value YEARS2 Entry Field */
+years2 = VpGetItemValue(window,'YEARS2')
+
+payment1 = interest(principal rate1 years1)
+total1 = payment1 * years1 * 12
+interest1 = total1 - principal
+
+payment2 = interest(principal rate2 years2)
+total2 = payment2 * years2 * 12
+interest2 = total2 - principal
+
+/* Set item value PAYMENT1 Text */
+CALL VpSetItemValue window,'PAYMENT1',STRIP(FORMAT(payment1,6,2))
+/* Set item value PAYMENT2 Text */
+CALL VpSetItemValue window,'PAYMENT2',STRIP(FORMAT(payment2,6,2))
+/* Set item value INTEREST1 Text */
+CALL VpSetItemValue window,'INTEREST1',STRIP(FORMAT(interest1,6,2))
+/* Set item value INTEREST2 Text */
+CALL VpSetItemValue window,'INTEREST2',STRIP(FORMAT(interest2,6,2))
+/* Set item value TOTAL1 Text */
+CALL VpSetItemValue window,'TOTAL1',STRIP(FORMAT(total1,6,2))
+/* Set item value TOTAL2 Text */
+CALL VpSetItemValue window,'TOTAL2',STRIP(FORMAT(total2,6,2))
+
+/* Set graph data GRAPH Business Graphic */
+/* no. of series */
+DATA.0=2
+/* series size */
+DATA.1=2
+DATA.0.0='Years'
+DATA.0.1=years1
+DATA.0.2=years2
+DATA.1.0='Interest'
+DATA.1.1=interest1
+DATA.1.2=interest2
+DATA.2.0='Principal'
+DATA.2.1=principal
+DATA.2.2=principal
+rc=VpSetItemValue(window,'GRAPH',DATA)
+return
+

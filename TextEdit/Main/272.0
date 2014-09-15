@@ -1,0 +1,5 @@
+/* Menu events - Cut	Shft+Del */
+Arg window self
+
+/* Cut text to clipboard 1000 Multi-Line Entry Field */
+rc=VpItem(window,1000,'SENDMSG','0x01d8')

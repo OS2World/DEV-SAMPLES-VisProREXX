@@ -1,0 +1,23 @@
+Arg window
+
+/* Get item value  Entry Field */
+value = VpGetItemValue(window,1001)
+SELECT
+   WHEN OPER = '+'
+      THEN value=value+TABUL
+   WHEN OPER = 'X'
+      THEN value=value*TABUL
+   WHEN OPER = '-'
+      THEN value=TABUL-value
+   WHEN OPER = '/'
+      THEN DO
+         if value <> 0 then value=TABUL/value
+         else value=0
+      END
+   OTHERWISE
+      value=value
+END
+/* Set item value  Entry Field */
+CALL VpSetItemValue window,1001,value
+tabul=0
+

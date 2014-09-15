@@ -1,0 +1,26 @@
+Arg window
+
+
+call RxFuncAdd 'SysSleep', 'RexxUtil', 'SysSleep'
+call RxFuncAdd 'VpUtilLoadFuncs', 'VPUTIL', 'VpUtilLoadFuncs'
+call VpUtilLoadFuncs
+
+
+tmp=1
+imagefile=topic
+prodname='VisPro/Paint'
+if length(imagefile)>0 then
+   CALL VpWindow window,'SETTITLE', prodname' - 'imagefile
+else
+   CALL VpWindow window,'SETTITLE', prodname' - <untitled>'
+
+if length(topic)>0 then
+      /* Load from file  Image Editor */
+      CALL VpImgEdt window,1010,'LOAD',imagefile,''
+
+mainwin=window
+settingswin=0
+attrwin=0
+colorwin=0
+/* Open the form I:\PROJECTS\PAINT\Tools */
+toolwin=VpOpenForm(window, 262, 'topic name')

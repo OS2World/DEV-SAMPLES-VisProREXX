@@ -1,0 +1,18 @@
+/* Event Form events, Opened */
+Arg window 
+icon.=''
+number=0
+/* valid index 1 - 22 */
+iconname = VpLoadPicture('SYSICON',11)
+/* valid index 1 - 22 */
+iconname2=VpLoadPicture('SYSICON',12)
+do x=1 to 6
+  /* Add item to end with icon 1000 Container */
+  index=VpAddItem(window, 1000, 'END', 'file' x, iconname)
+end /*end of loop*/
+do x=7 to 12
+  /* Add item to end with icon 1001 Container */
+  index=VpAddItem(window, 1001, 'END', 'file' x, iconname2)
+end /*end of loop*/
+/* max num items, type, rendering, moveok, copyok, linkok, default */
+CALL VpWindow window,'SETFORMDRAGINFO',1,'Icon','<DRM_OS2FILE,DRF_TEXT>',1,1,1,'MOVE'

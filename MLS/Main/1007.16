@@ -1,0 +1,7 @@
+Arg window self
+
+/* Get item value RESULTSCNR Container */
+value = VpGetItemValue(window,'RESULTSCNR')
+/* Open the form C:\UCANDUVP\PROJECTS\MYMLS\Notebook*/
+value=VpOpenForm(window, 257, value)
+

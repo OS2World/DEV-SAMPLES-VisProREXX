@@ -1,0 +1,5 @@
+Arg window self
+
+/* Movie - rewind  MMPM/2 Video Object */
+CALL VpVideo window, 1000, 'REWIND'
+

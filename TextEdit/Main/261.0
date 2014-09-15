@@ -1,0 +1,12 @@
+/* Menu events - S~ave as */
+Arg window self
+
+if filename<>'' then
+  newfile = VpFileDialog(window,'SAVE',filename,'Save As')
+else
+  newfile = VpFileDialog(window,'SAVE','*.*','Save As')
+
+if newfile <> '' then do
+  filename=newfile
+  call save_fil
+end

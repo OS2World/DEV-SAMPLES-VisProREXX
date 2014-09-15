@@ -1,0 +1,11 @@
+Arg window self
+
+/* Get item value TEMPLATE Entry Field */
+assoc.1=VpGetItemValue(window,'TEMPLATE')
+/* Get item value WILDCARD Entry Field */
+assoc.2=VpGetItemValue(window,'WILDCARD')
+/* Get item value ICONNAME Entry Field */
+assoc.4=VpGetItemValue(window,'ICONNAME')
+changed=1
+CALL VpWindow window,'CLOSE'
+

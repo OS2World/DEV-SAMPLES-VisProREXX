@@ -1,0 +1,5 @@
+/*******/
+Parse Arg window self
+
+response=VpMessageBox(window,'Notice','Remember to say "Thank You" to every customer ')
+

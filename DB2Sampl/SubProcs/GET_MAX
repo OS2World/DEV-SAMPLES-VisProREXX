@@ -1,0 +1,26 @@
+/* obtain next unique record number */
+Arg window table_name table_column
+
+last_id = 0;
+
+prep_string = "SELECT MAX("|| table_column || ") FROM "|| table_name
+
+call sqlexec 'DECLARE c9 CURSOR FOR s9';
+
+call sqlexec 'PREPARE s9 FROM :prep_string';
+if ( SQLCA.SQLCODE <> 0) then
+     response=VpMessageBox(window,TITLE,'DB Error with PREPARE STATEMENT.  SQLCODE = 'SQLCA.SQLCODE)
+else do
+   call sqlexec 'OPEN c9';
+
+   do while (SQLCA.SQLCODE = 0)
+        call sqlexec 'FETCH c9 INTO :last_id';
+        if ( SQLCA.SQLCODE <> 100) then
+             last_id = last_id + 1;
+   end
+end
+
+call sqlexec 'CLOSE c9';
+
+return last_id
+

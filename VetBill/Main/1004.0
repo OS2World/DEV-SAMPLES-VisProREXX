@@ -1,0 +1,15 @@
+/*******/
+Parse Arg window self
+
+ /* Get button state FLEA Check Box */
+flag = VpIsSelected(window,'FLEA')
+
+ /* Get item value TOTAL Entry Field */
+value = VpGetItemValue(window,'TOTAL')
+
+       if flag = 1 then value = value + 19.95     /* checked - add to total      */
+        else  value = value - 19.95                     /* un-checked - subtract      */
+
+ /* Set item value TOTAL Entry Field */
+CALL VpSetItemValue window,'TOTAL',value
+

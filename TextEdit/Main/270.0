@@ -1,0 +1,5 @@
+/* Menu events - ~Find...	Ctrl+F */
+Arg window self
+
+/* Show Find Dialog 1000 Multi-Line Entry Field */
+CALL VpItem window, 1000, 'SHOWMLEFIND'

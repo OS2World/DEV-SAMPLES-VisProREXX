@@ -1,0 +1,14 @@
+/* Event Advise notification - DDECLIENT DDE Client */
+Arg window self
+
+if reqwindow> 0 then do
+   /* Get notify value DDECLIENT DDE Client */
+   rc=VpDDECLT(window, 'DDECLIENT', 'GETNOTIFYVALUE','NOT.')
+   /* NOT.1 - item name, NOT.2 - item value */
+
+   /* Set item value ITEMNAME Entry Field */
+   CALL VpSetItemValue reqwindow,'ITEMNAME',not.1
+
+   /* Set item value RESULTS Multi-Line Entry Field */
+   CALL VpSetItemValue reqwindow,'RESULTS',not.2
+end   

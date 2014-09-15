@@ -1,0 +1,5 @@
+/* Menu events - ~using help... */
+Arg window self
+
+CALL VpWindow window, 'HELPFORHELP'
+

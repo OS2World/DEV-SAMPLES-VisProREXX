@@ -1,0 +1,9 @@
+Arg window self index
+
+/* VPDROPINFO stem variable contains drag information */
+if VPDROPINFO.1.1=='Bitmap' then
+  resource=BITMAP
+  else
+  resource=POINTER
+
+CALL ADDFILE VPDROPINFO.1.3||VPDROPINFO.1.4 || ' ' || resource || ' ' || 0

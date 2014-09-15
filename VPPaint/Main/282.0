@@ -1,0 +1,9 @@
+/* Menu events - ~Font... */
+Arg window self
+
+/* Get item font 1010 Image Editor */
+value=VpItem(window,1010,'GETFONT')
+value=VpFontDialog(window, value);
+if value<>'' then
+   /* Set item font 1010 Image Editor */
+   CALL VpItem window,1010,'FONT', value

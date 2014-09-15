@@ -1,0 +1,15 @@
+/* Event Form events, Closed */
+Arg window 
+
+rc=SysFileDelete(drive||drg_file)
+/* Contents changed? 1000 Multi-Line Entry Field */
+rc=VpItem(window,1000,'SENDMSG','0x01ba')
+if rc=1 then do
+  response=VpMessageBox(window,'Contents Have Changed','The contents have changed, do you want to save before exiting?','YESNOCNCL')
+  if response='YES' then
+    /* Select item ~Save	F2260 Menu Item */
+    CALL VpSelect window,260
+  else if response='CANCEL' then
+    return 1
+end
+

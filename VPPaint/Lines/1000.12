@@ -1,0 +1,14 @@
+Arg window self x y
+ 
+/* Get item size  Free-form Window */
+xy=VpItem(window,1000,'ITEMSIZE')
+PARSE VAR xy cx cy
+
+value=trunc(8*y/cy)+1
+if value==8 then
+   value=9
+
+/* Set line type  Image Editor */
+CALL VpImgEdt mainwin, 1010, 'SETLINETYPE', value
+/* Repaint item  Free-form Window */
+rc=VpItem(window,1000,'PAINT')

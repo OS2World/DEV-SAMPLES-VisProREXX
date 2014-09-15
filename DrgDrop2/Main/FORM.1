@@ -1,0 +1,53 @@
+Arg window
+
+if topic == '' then do
+   topic = 'temp.vpr'
+end
+
+/* load the vpr file given in the topic */
+/* place information in container */
+/* if error get out */
+
+CALL RXFUNCADD 'SysLoadFuncs','REXXUTIL','SysLoadFuncs'
+CALL SysLoadFuncs
+
+assoc.1=0
+changed=0
+
+IF LENGTH(topic) > 0 THEN
+DO
+  DO WHILE LINES(topic)
+    value=LINEIN(topic)
+    parse upper var value COLUMNS.2 COLUMNS.1 COLUMNS.3
+    if columns.2=='ASSOCTABLE' then
+    do
+       value=LINEIN(topic) /* read begin */
+       value=LINEIN(topic) /* assoc entry */
+       parse upper var value assoc.1 ',' assoc.2 ',' assoc.3 ',' assoc.4
+       assoc.1=strip(assoc.1)
+       assoc.2=strip(assoc.2)
+       assoc.3=strip(assoc.3)
+       assoc.4=strip(assoc.4)
+       assoc.1=strip(assoc.1,,'"')
+       assoc.2=strip(assoc.2,,'"')
+       assoc.3=strip(assoc.3,,'"')
+       assoc.4=strip(assoc.4,,'"')
+    end
+    else if columns.2=='POINTER' | columns.2=='BITMAP' then do
+       image = VpLoadPicture('FILE',strip(columns.3))
+       /* Add item to end with icon  Container */
+       index=VpAddItem(window, 1000, 'END', 'COLUMNS.', image)
+   end
+
+  END
+END
+
+rc=stream(topic,'C','CLOSE')
+
+/* View as details  Container */
+rc=VpSetItemStyle(window,1000,'DETAILS')
+
+/* max num items, type, rendering, moveok, copyok, linkok, default */
+CALL VpWindow window,'SETFORMDRAGINFO',1,'Plain Text,Bitmap,Icon',,
+        '<DRM_OS2FILE,DRF_TEXT>',0,1,0,'COPY'
+

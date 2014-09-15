@@ -1,0 +1,23 @@
+Arg window self index
+
+/* if change is index, check for duplicates or for invalid numbers */
+/* such as non digits or numbers less than 1000 */
+
+/* Get item columns at index  Container */
+/* COLUMNS.0 - count */
+/* COLUMNS.n - nth columns */
+CALL VpGetItemValue window,1000,'DETAILS','COLUMNS.',index
+
+if columns.3 <> '' then
+do
+  columns.3 = strip(columns.3)
+  /* window object_id type index */
+  columns.1 = check(window columns.1 columns.2 index)  
+  image = VpLoadPicture('FILE', columns.3)
+  /* Add an item after an item with icon  Container */
+  indx=VpAddItem(window, 1000, index, 'COLUMNS.', image)
+  /* Delete a list item  Container */
+  CALL VpDeleteItem window,1000,index
+end
+
+

@@ -1,0 +1,7 @@
+/* Menu events - Sa~ve and quit	F4 */
+Arg window self
+
+/* Select item ~Save	F2260 Menu Item */
+CALL VpSelect window,260
+/* Select item ~Quit	F3264 Menu Item */
+CALL VpSelect window,264

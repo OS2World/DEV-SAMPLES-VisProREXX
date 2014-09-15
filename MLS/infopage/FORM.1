@@ -1,0 +1,35 @@
+Arg window 
+
+homefound=0
+
+DO WHILE LINES(datafile) & (homefound=0)
+   place=LINEIN(datafile)
+   price=LINEIN(datafile)
+   size=LINEIN(datafile)
+   area=LINEIN(datafile)
+   homeinfo=LINEIN(datafile)
+   lotinfo=LINEIN(datafile)
+   realtor=LINEIN(datafile)
+   skip=LINEIN(datafile)
+
+   if place=topic then homefound=1
+END   
+
+rc=stream(datafile,'c','close')
+
+if homefound then 
+do/* Set item value ADDRTXT Text */
+CALL VpSetItemValue window,'ADDRTXT',place
+/* Set item value PRICETXT Text */
+CALL VpSetItemValue window,'PRICETXT',price
+/* Set item value SIZETXT Text */
+CALL VpSetItemValue window,'SIZETXT',size
+/* Set item value AREATXT Text */
+CALL VpSetItemValue window,'AREATXT',area
+/* Set item value HOMEINFOTXT Text */
+CALL VpSetItemValue window,'HOMEINFOTXT',homeinfo
+/* Set item value LOTINFOTXT Text */
+CALL VpSetItemValue window,'LOTINFOTXT',lotinfo
+/* Set item value REALTORTXT Text */
+CALL VpSetItemValue window,'REALTORTXT',realtor
+END

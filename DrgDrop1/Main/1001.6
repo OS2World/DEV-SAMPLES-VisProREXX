@@ -1,0 +1,34 @@
+/* Event Container  1001, Drag drop */
+Arg window self index
+/* VPDROPINFO stem variable contains drag information */
+if vpdropinfo.1.3<> 'c:\' then
+  do
+    number=number+1  
+    path.number=vpdropinfo.1.3||vpdropinfo.1.4
+    icon.number = VpLoadPicture('FILEICON',vpdropinfo.1.3||vpdropinfo.1.4)
+    /* Add item to end with icon 1001 Container */
+    index=VpAddItem(window, 1001, 'END', vpdropinfo.1.4, icon.number)
+  end
+else
+  do x=1 to indexes.0
+    parse var nameoffile.x . numfile
+    if numfile>6 & numfile<13 then 
+      icotype=iconname2
+    if numfile<7 & numfile>0 then 
+      icotype=iconname
+    if numfile <1 | numfile>12 then
+      do y=1 to number
+        position=LASTPOS('\',path.y)
+        tempstring=DELSTR(path.y,1,position)
+        if tempstring=nameoffile.x then
+        icotype = VpLoadPicture('FILEICON',path.y)
+      end
+    /* Delete a list item 1000 Container */
+    CALL VpDeleteItem window,1000,indexes.x
+    /* Add item to end with icon 1001 Container */
+    index=VpAddItem(window, 1001, 'END', nameoffile.x, icotype)
+  end
+  /* Unselect all items 1001 Container */
+  CALL VpSelect window,1001,'ALL',0
+  /* Unselect all items 1000 Container */
+  CALL VpSelect window,1000,'ALL',0

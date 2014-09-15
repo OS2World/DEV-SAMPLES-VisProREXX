@@ -1,0 +1,12 @@
+Arg window self x y
+
+/* Get item size  Free-form Window */
+xy=VpItem(window,1003,'ITEMSIZE')
+PARSE VAR xy cx cy
+
+value=trunc(4*y/cy)+1
+
+/* Set line end  Image Editor */
+CALL VpImgEdt mainwin, 1010, 'SETLINEEND', value
+/* Repaint item  Free-form Window */
+rc=VpItem(window,1003,'PAINT')

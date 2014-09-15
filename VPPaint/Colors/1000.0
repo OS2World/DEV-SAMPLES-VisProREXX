@@ -1,0 +1,6 @@
+Arg window self
+
+/* Get item value 1 Pattern Selector */
+value = VpGetItemValue(window,1000)
+/* Set pattern  Image Editor */
+CALL VpImgEdt mainwin, 1010, 'SETPATTERN', value

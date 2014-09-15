@@ -1,0 +1,16 @@
+/********/
+calculate: procedure
+arg principal interest years
+
+/* calculate monthly payment */
+MINT = interest / 1200
+MONTHS = 12 * years
+PF = 1
+DO WHILE MONTHS > 0
+   PF = PF * (1+MINT)
+   MONTHS=MONTHS-1
+END
+PF = MINT/(1-(1/PF))
+payment = PF*principal
+return payment
+

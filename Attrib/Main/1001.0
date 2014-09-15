@@ -1,0 +1,4 @@
+/* Event List Box  1001, Clicked/selected */
+Arg window self
+
+CALL CLICK window

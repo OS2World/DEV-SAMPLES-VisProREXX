@@ -1,0 +1,8 @@
+/* Event Clicked/selected - Unadvise  1009 */
+Arg window self
+
+/* Get item value ITEMNAME Entry Field */
+value = VpGetItemValue(window,'ITEMNAME')
+
+/* Unadvise DDECLIENT DDE Client */
+rc=VpDDECLT(mainwindow, 'DDECLIENT', 'REQUEST',value,'UNADVISE')

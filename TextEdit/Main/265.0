@@ -1,0 +1,4 @@
+/* Event Menu events, ~Edit */
+Arg window self
+
+call checkmnu

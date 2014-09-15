@@ -1,0 +1,57 @@
+Arg window self
+
+/* Get item size  Free-form Window */
+xy=VpItem(window,1003,'ITEMSIZE')
+PARSE VAR xy cx cy
+delta=cy/4
+
+/* Get line end  Image Editor */
+value=VpImgEdt(mainwin, 1010, 'GETLINEEND')
+
+y=(value-1)*delta
+cx=cx-1
+
+call VpDraw window,1003,'MOVE',0,y
+/* Draw a box  Free-form Window */
+call VpDraw window,1003,'BOX',cx,y+delta-1
+y=delta/2
+halfdelta=delta/4
+xarrow=cx/4
+do i=1 to 4
+   /* Move graphics cursor  Free-form Window */
+   call VpDraw window,1003,'MOVE',1,y
+   /* Draw a line  Free-form Window */
+   call VpDraw window,1003,'LINE',cx,y
+   if i==4 | i==3 then do
+      /* Path begin  Free-form Window */
+      call VpDraw window,1003,'BEGINPATH'
+      /* Draw a line  Free-form Window */
+      call VpDraw window,1003,'LINE',cx-xarrow,y+halfdelta
+      /* Draw a line  Free-form Window */
+      call VpDraw window,1003,'LINE',cx-xarrow,y-halfdelta
+      /* Draw a line  Free-form Window */
+      call VpDraw window,1003,'LINE',cx,y
+      /* Path end  Free-form Window */
+      call VpDraw window,1003,'ENDPATH'
+      /* Path fill  Free-form Window */
+      call VpDraw window,1003,'FILLPATH'
+   end
+   if i==4 | i==2 then do
+      /* Move graphics cursor  Free-form Window */
+      call VpDraw window,1003,'MOVE',1,y
+      /* Path begin  Free-form Window */
+      call VpDraw window,1003,'BEGINPATH'
+      /* Draw a line  Free-form Window */
+      call VpDraw window,1003,'LINE',xarrow,y+halfdelta
+      /* Draw a line  Free-form Window */
+      call VpDraw window,1003,'LINE',xarrow,y-halfdelta
+      /* Draw a line  Free-form Window */
+      call VpDraw window,1003,'LINE',1,y
+      /* Path end  Free-form Window */
+      call VpDraw window,1003,'ENDPATH'
+      /* Path fill  Free-form Window */
+      call VpDraw window,1003,'FILLPATH'
+   end
+   y=y+delta
+end
+

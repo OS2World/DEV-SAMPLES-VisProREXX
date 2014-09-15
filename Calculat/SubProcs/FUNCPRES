@@ -1,0 +1,12 @@
+Arg window self
+
+
+if (OPER<>0) & (OPER<>'=') THEN
+   CALL tabulate window
+/* Get item value  Entry Field */
+value = VpGetItemValue(window,1001)
+/* Get item value  self */
+value2 = VpGetItemValue(window,self)
+OPER=value2
+
+

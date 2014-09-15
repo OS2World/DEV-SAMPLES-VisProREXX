@@ -1,0 +1,42 @@
+/* init the selected menu item states */
+arg window
+
+/* Get selected region  Image Editor */
+rc=VpImgEdt(window, 1010, 'GETSELECTION')
+PARSE VAR rc x1 y1 x2 y2
+if rc='0 0 0 0' then do
+   /* Disable item ~Crop Menu Item */
+   CALL VpItem window,286,'DISABLE'
+   /* Disable item ~Flip Menu Item */
+   CALL VpItem window,293,'DISABLE'
+   /* Disable item ~Horizontally Menu Item */
+   CALL VpItem window,295,'DISABLE'
+   /* Disable item ~Vertically Menu Item */
+   CALL VpItem window,296,'DISABLE'
+   /* Disable item ~Rotate Menu Item */
+   CALL VpItem window,294,'DISABLE'
+   /* Disable item ~90 degrees Menu Item */
+   CALL VpItem window,297,'DISABLE'
+   /* Disable item ~180 degrees Menu Item */
+   CALL VpItem window,298,'DISABLE'
+   /* Disable item ~270 degrees Menu Item */
+   CALL VpItem window,299,'DISABLE'
+end
+else do
+   /* Enable item ~Crop Menu Item */
+   CALL VpItem window,286,'ENABLE'
+   /* Enable item ~Flip Menu Item */
+   CALL VpItem window,293,'ENABLE'
+   /* Enable item ~Horizontally Menu Item */
+   CALL VpItem window,295,'ENABLE'
+   /* Enable item ~Vertically Menu Item */
+   CALL VpItem window,296,'ENABLE'
+   /* Enable item ~Rotate Menu Item */
+   CALL VpItem window,294,'ENABLE'
+   /* Enable item ~90 degrees Menu Item */
+   CALL VpItem window,297,'ENABLE'
+   /* Enable item ~180 degrees Menu Item */
+   CALL VpItem window,298,'ENABLE'
+   /* Enable item ~270 degrees Menu Item */
+   CALL VpItem window,299,'ENABLE'
+end

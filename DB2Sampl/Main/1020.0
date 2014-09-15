@@ -1,0 +1,25 @@
+Arg window self
+
+/* Get index of first selected value CUSTLIST List Box */
+index=VpGetIndex(window,'CUSTLIST','SELECTED',0)
+
+/* Get item value CUSTNUM Entry Field */
+cust.customer_id = VpGetItemValue(window,'CUSTNUM')
+if cust.customer_id = '' then return
+
+/* Get customer information */
+call getcust(window)
+
+/* Change customer */
+rc=chngcust(window)
+
+if rc=0 then do
+   value=LEFT(STRIP(cust.name),25)||' '||LEFT(cust.company,25)
+   value = value||' '||LEFT(cust.customer_id,10)
+
+   /* Set item value at index CUSTLIST List Box */
+   CALL VpSetItemValue window,'CUSTLIST',value,index
+
+   response=VpMessageBox(window,TITLE,'Customer information updated successfully.')
+end
+

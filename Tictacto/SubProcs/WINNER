@@ -1,0 +1,143 @@
+arg window
+number=0
+wholenum=selections/2
+             parse var wholenum firstchar . .
+             DO UNTIL number= 4
+          
+
+             if firstchar=.5 | firstchar=1.5 | firstchar=2.5 | firstchar=3.5 | firstchar=4.5  then
+               do
+                 champion='Player'
+                 if position=1 & win=0 then
+	           do 	            	
+                     playerrow=1
+                     
+                     do r=1 to 3
+                       /* Set cell value 1000 Value Set */
+                       CALL VpSetItemValue window,1000,winnerzero,playerrow,playercol
+                       playerrow=playerrow+1
+                     end
+                     
+                     /* Painting enable 1000 Value Set */
+                     CALL VpItem window,1000,'ENABLEPAINT'
+                                          
+                   
+                  end
+                if position=2 & win=0 then
+                  do
+                    playercol=1
+                    
+                    do r=1 to 3
+                      /* Set cell value 1000 Value Set */
+                       CALL VpSetItemValue window,1000,winnerzero,playerrow,playercol
+                       playercol=playercol+1
+                    end
+                     /* Painting enable 1000 Value Set */
+                     CALL VpItem window,1000,'ENABLEPAINT'
+                     
+                      end
+                   
+                 if position=4 & win=0 then
+                   do 	            	
+                     playerrow=1
+                     playercol=1
+                     
+                     do r=1 to 3
+                       /* Set cell value 1000 Value Set */
+                       CALL VpSetItemValue window,1000,winnerzero,playerrow,playercol
+                       playerrow=playerrow+1
+                       playercol=playercol+1  
+                     end
+                     /* Painting enable 1000 Value Set */
+                     CALL VpItem window,1000,'ENABLEPAINT'
+                     
+                   
+                  end
+                  if position=3 & win=0 then
+                   do 	            	
+                     playerrow=3
+                     playercol=1
+                     do r=1 to 3
+                       /* Set cell value 1000 Value Set */
+                       CALL VpSetItemValue window,1000,winnerzero,playerrow,playercol
+                       playerrow=playerrow-1
+                       playercol=playercol+1  
+                     end
+                     /* Painting enable 1000 Value Set */
+                     CALL VpItem window,1000,'ENABLEPAINT'
+                      
+                   
+                  end
+
+		end /* end of main loop */
+		
+	     else
+              do
+                champion='Computer'
+                 if position=1 & win=1 then
+	           do 	            	
+                     winrow=1
+                                          do r=1 to 3
+                       /* Set cell value 1000 Value Set */
+                       CALL VpSetItemValue window,1000,winnerx,winrow,wincolumn
+                       winrow=winrow+1
+                     end
+                     /* Painting enable 1000 Value Set */
+                    CALL VpItem window,1000,'ENABLEPAINT' 
+                     
+                   
+                  end
+                if position=2 & win=1 then
+                  do
+                    wincolumn=1
+                     do r=1 to 3
+                      /* Set cell value 1000 Value Set */
+                       CALL VpSetItemValue window,1000,winnerx,winrow,wincolumn
+                       wincolumn=wincolumn+1
+                    end
+                     /* Painting enable 1000 Value Set */
+                     CALL VpItem window,1000,'ENABLEPAINT'
+                     
+
+                   end
+                   
+                 if position=4 & win=1 then
+                   do 	            	
+                     winrow=1
+                     wincolumn=1
+                    do r=1 to 3
+                       /* Set cell value 1000 Value Set */
+                       CALL VpSetItemValue window,1000,winnerx,winrow,wincolumn
+                       winrow=winrow+1
+                       wincolumn=wincolumn+1  
+                     end
+                     /* Painting enable 1000 Value Set */
+                     CALL VpItem window,1000,'ENABLEPAINT'
+                                       
+                  end
+                 if position=3 & win=1 then
+                   do 	            	
+                    winrow=3
+                     wincolumn=1
+                     do r=1 to 3
+                       /* Set cell value 1000 Value Set */
+                       CALL VpSetItemValue window,1000,winnerx,winrow,wincolumn
+                       winrow=winrow-1
+                       wincolumn=wincolumn+1  
+                     end
+                     /* Painting enable 1000 Value Set */
+                     CALL VpItem window,1000,'ENABLEPAINT'
+                                        
+                  end
+
+		end /* end of main loop */        
+
+number = number + 1
+end
+if champion='Player' then
+  response=VpMessageBox(window,'Game over','Congratulations! You are the winner.')
+else
+  response=VpMessageBox(window,'Game over','The computer was victorious.')
+              
+
+return                          

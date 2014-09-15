@@ -1,0 +1,10 @@
+Arg window self
+
+/* Delete all items THREADLST List Box */
+CALL VpDeleteItem window,'THREADLST','ALL'
+
+CALL VpThread "GETIDLIST", "VALUE."
+/* Add items from list THREADLST List Box */
+index=VpAddItem(window, 'THREADLST', 'LIST', 'VALUE.')
+/* Select item THREADLST List Box */
+CALL VpSelect window,'THREADLST',1,1

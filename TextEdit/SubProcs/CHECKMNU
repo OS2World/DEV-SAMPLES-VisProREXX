@@ -1,0 +1,34 @@
+/**/
+
+/* Can Undo? 1000 Multi-Line Entry Field */
+rc=VpItem(window,1000,'SENDMSG','0x01cd')
+if rc<>0 then
+  /* Enable item Undo	Alt+Bkspc275 Menu Item */
+  CALL VpItem window,275,'ENABLE'
+else
+  /* Disable item Undo	Alt+Bkspc275 Menu Item */
+  CALL VpItem window,275,'DISABLE'
+  
+/* Get selection range 1000 Multi-Line Entry Field */
+range=VpGetIndex(window,1000)
+PARSE VAR range first last
+if first=last then do
+  /* Disable item Cut	Shft+Del272 Menu Item */
+  CALL VpItem window,272,'DISABLE'
+  /* Disable item Copy	Ctrl+Ins271 Menu Item */
+  CALL VpItem window,271,'DISABLE'
+  /* Disable item Clear	Delete273 Menu Item */
+  CALL VpItem window,273,'DISABLE'
+  /* Disable item Select none	Ctrl+\339 Menu Item */
+  CALL VpItem window,339,'DISABLE'
+end
+else do
+  /* Enable item Cut	Shft+Del272 Menu Item */
+  CALL VpItem window,272,'ENABLE'
+  /* Enable item Copy	Ctrl+Ins271 Menu Item */
+  CALL VpItem window,271,'ENABLE'
+  /* Enable item Clear	Delete273 Menu Item */
+  CALL VpItem window,273,'ENABLE'
+  /* Enable item Select none	Ctrl+\339 Menu Item */
+  CALL VpItem window,339,'ENABLE'
+end

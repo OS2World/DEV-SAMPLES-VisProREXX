@@ -1,0 +1,15 @@
+/*******/
+Parse Arg window self
+
+ /* Uncheck the item PHYSICAL Check Box */
+CALL VpSelect window,'PHYSICAL',0
+
+ /* Uncheck the item RABIES Check Box */
+CALL VpSelect window,'RABIES',0
+
+ /* Uncheck the item FLEA Check Box */
+CALL VpSelect window,'FLEA',0
+
+ /* Set item value TOTAL Entry Field */
+CALL VpSetItemValue window,'TOTAL','0'
+

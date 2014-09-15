@@ -1,0 +1,4 @@
+Arg window self
+
+/* Set zoom level  Image Editor */
+CALL VpImgEdt window, 1010, 'SETZOOM', 65536

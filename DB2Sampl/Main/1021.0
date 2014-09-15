@@ -1,0 +1,18 @@
+Arg window self
+
+/* Get index of first selected value CUSTLIST List Box */
+index=VpGetIndex(window,'CUSTLIST','SELECTED',0)
+
+/* Get item value CUSTNUM Entry Field */
+cust.customer_id = VpGetItemValue(window,'CUSTNUM')
+if cust.customer_id = '' then return
+
+rc = delcust(window)
+
+if rc=0 then do
+   /* Delete a list item CUSTLIST List Box */
+   CALL VpDeleteItem window,'CUSTLIST',index
+   /* Select item CUSTLIST List Box */
+   CALL VpSelect window,'CUSTLIST',1,1
+end
+

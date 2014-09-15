@@ -1,0 +1,12 @@
+Arg window
+
+CALL VpWindow window,'SETTITLE','Multiple Listing Service'
+/* Add several items to end SIZESB Spin Button */
+CALL VpAddItem window,'SIZESB', 'END', 1000,1500,2000,2500,3000,3500
+/* Check the item  LOWPRICECB Check Box */
+CALL VpSelect window,'LOWPRICECB',1
+/* Check the item  URBANRB Radio Button */
+CALL VpSelect window,'URBANRB',1
+DATAFILE = 'HOMES'
+HOUSEICON = VpLoadPicture('FILE','house.ptr')
+

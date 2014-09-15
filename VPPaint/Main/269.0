@@ -1,0 +1,4 @@
+Arg window self
+
+/* Clear  Image Editor */
+CALL VpImgEdt window, 1010, 'CLEAR'

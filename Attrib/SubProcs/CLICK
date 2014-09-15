@@ -1,0 +1,143 @@
+arg window
+
+numofa=0
+numofs=0
+numofh=0
+numofr=0
+
+/* Get indexes of all selected items 1001 List Box */
+CALL VpGetIndex window,1001,'ALLSELECTED','INDEXES.'
+
+do x=1 to indexes.0
+    /* Get item value at index 1001 List Box */
+    filename=VpGetItemValue(window,1001,indexes.x)
+    attributea=SUBSTR(filename,posofa,1)
+    if attributea='A' then
+      numofa=numofa+1
+    attributes=SUBSTR(filename,posofs,1)
+    if attributes='S' then
+      numofs=numofs+1
+    attributeh=SUBSTR(filename,posofh,1)
+    if attributeh='H' then
+      numofh=numofh+1
+    attributer=SUBSTR(filename,posofr,1)
+    if attributer='R' then
+      numofr=numofr+1
+end
+
+/* set state of ARCHIVE check box */
+if indexes.0==0 then
+ do
+   /* Uncheck the item A1002 Check Box */
+   CALL VpSelect window,1002,0
+   /* Disable item A1002 Check Box */
+   CALL VpItem window,1002,'DISABLE' 
+ end
+else
+ do
+   /* Enable item A1002 Check Box */
+   CALL VpItem window,1002,'ENABLE'
+   if numofa==0 then
+     do
+       /* Uncheck the item  A1002 Check Box */
+       CALL VpSelect window,1002,0
+     end
+   else if numofa==indexes.0 then
+     do
+       /* Check the item  A1002 Check Box */
+       CALL VpSelect window,1002,1
+     end
+   else
+     do
+       /* Check the item as 3state A1002 Check Box */
+       CALL VpSelect window,1002,2
+     end 
+ end
+
+/* set state of SYSTEM check box */
+if indexes.0==0 then
+ do
+   /* Uncheck the item S1003 Check Box */
+   CALL VpSelect window,1003,0
+   /* Disable item S1003 Check Box */
+   CALL VpItem window,1003,'DISABLE' 
+ end
+else
+ do
+   /* Enable item S1003 Check Box */
+   CALL VpItem window,1003,'ENABLE'
+   if numofs==0 then
+     do
+       /* Uncheck the item  S1003 Check Box */
+       CALL VpSelect window,1003,0
+     end
+   else if numofs==indexes.0 then
+     do
+       /* Check the item  S1003 Check Box */
+       CALL VpSelect window,1003,1
+     end
+   else
+     do
+       /* Check the item as 3state S1003 Check Box */
+       CALL VpSelect window,1003,2
+     end 
+ end
+
+/* set state of HIDDEN check box */
+if indexes.0==0 then
+ do
+   /* Uncheck the item H1004 Check Box */
+   CALL VpSelect window,1004,0
+   /* Disable item H1004 Check Box */
+   CALL VpItem window,1004,'DISABLE' 
+ end
+else
+ do
+   /* Enable item H1004 Check Box */
+   CALL VpItem window,1004,'ENABLE'
+   if numofh==0 then
+     do
+       /* Uncheck the item  H1004 Check Box */
+       CALL VpSelect window,1004,0
+     end
+   else if numofh==indexes.0 then
+     do
+       /* Check the item  H1004 Check Box */
+       CALL VpSelect window,1004,1
+     end
+   else
+     do
+       /* Check the item as 3state H1004 Check Box */
+       CALL VpSelect window,1004,2
+     end 
+ end
+
+/* set state of READONLY check box */
+if indexes.0==0 then
+ do
+   /* Uncheck the item R1005 Check Box */
+   CALL VpSelect window,1005,0
+   /* Disable item R1005 Check Box */
+   CALL VpItem window,1005,'DISABLE' 
+ end
+else
+ do
+   /* Enable item R1005 Check Box */
+   CALL VpItem window,1005,'ENABLE'
+   if numofr==0 then
+     do
+       /* Uncheck the item  R1005 Check Box */
+       CALL VpSelect window,1005,0
+     end
+   else if numofr==indexes.0 then
+     do
+       /* Check the item  R1005 Check Box */
+       CALL VpSelect window,1005,1
+     end
+   else
+     do
+       /* Check the item as 3state R1005 Check Box */
+       CALL VpSelect window,1005,2
+     end 
+ end
+

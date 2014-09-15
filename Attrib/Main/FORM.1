@@ -1,0 +1,57 @@
+/* Form events - Opened */
+arg window
+
+Call RxFuncAdd 'SysLoadFuncs', 'RexxUtil', 'SysLoadFuncs'
+Call SysLoadFuncs
+rc=directory()
+CALL VpWindow window,'SETTITLE','Current directory: 'rc
+/* set constants for position of atttibutes flags returned by attrib */
+posofa=3
+posofs=6
+posofh=7
+posofr=8
+posoffilename=11
+/* 3-state property on A1002 Check Box */
+rc=VpItem(window,1002,'SETSTYLEBIT', 2, 1)
+/* 3-state property on H1004 Check Box */
+rc=VpItem(window,1004,'SETSTYLEBIT', 2, 1)
+/* 3-state property on R1005 Check Box */
+rc=VpItem(window,1005,'SETSTYLEBIT', 2, 1)
+/* 3-state property on S1003 Check Box */
+rc=VpItem(window,1003,'SETSTYLEBIT', 2, 1)
+parse var topic curdir .
+call sysfiletree curdir'\*','files.','FO'
+if files.0=0 & topic <> '' then
+  do
+   response=VpMessageBox(window,'title','Files not found in target directory')
+   exit
+  end
+if topic='' then
+  do
+   parse source . . curdir 
+   num=lastpos('\',curdir)
+   curdir=delstr(curdir,num)
+  end
+file_queue = RxQueue( 'CREATE' )
+CALL RxQueue 'SET', file_queue
+address cmd 'attrib 'curdir'\* | rxqueue 'file_queue
+if Queued()=0 then
+  response=VpMessageBox(window,'title','No files found')
+else
+  do
+    do Queued()
+      Parse Pull data
+      psition=lastpos('\',data)
+      fsition=lastpos(':',data)
+      number=fsition-1
+      total=psition-number + 1
+      data=DELSTR(data,number,total)
+      /* numberoffiles=numberoffiles+1   */
+      /*Add item sorted ascending List Box */
+      Call VpAddItem window, 1001, 'ASCENDING', data
+    end  
+    Call RxQueue 'DELETE', file_queue
+  end
+
+  
+

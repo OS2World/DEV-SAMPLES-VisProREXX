@@ -1,0 +1,11 @@
+/* Event Clicked/selected - Poke  1000 */
+Arg window self
+
+/* Get item value ITEMNAME Entry Field */
+itemName = VpGetItemValue(window,'ITEMNAME')
+
+/* Get item value DATA Entry Field */
+value = VpGetItemValue(window,'DATA')
+
+/* Poke DDECLIENT DDE Client */
+rc=VpDDECLT(mainwindow, 'DDECLIENT', 'POKE',itemname,value)

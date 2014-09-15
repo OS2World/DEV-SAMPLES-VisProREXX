@@ -1,0 +1,35 @@
+Arg window self index
+
+if index <> 0 then
+DO
+  /* Get item columns at index  Container */
+  /* COLUMNS.0 - count */
+  /* COLUMNS.n - nth columns */
+  CALL VpGetItemValue window,1000,'DETAILS','COLUMNS.',index
+
+  if columns.2 = 'BITMAP' then
+    resource_format = 'RESBMP'
+  else
+    resource_format = 'RESICON'
+
+   filename='C:\temp!!vp.tmp'
+   'erase 'filename' 1>NUL 2>NUL'
+   value='value = VpLoadPicture('''resource_format''', 'columns.1')'
+   rc=LINEOUT(filename,value,1)
+   rc=LINEOUT(filename)
+   draginfo.0=1 /* count */
+   draginfo.1=1 /* moveable */
+   draginfo.2=1 /* copyable */
+   draginfo.3=0 /* linkable */
+   draginfo.4=0 /* optional icon */
+   draginfo.1.1='DRT_TEXT' /* type */
+   draginfo.1.2='<DRM_OS2FILE,DRF_TEXT>' /* rendering */
+   draginfo.1.3='c:'    /* source dir */
+   draginfo.1.4='temp!!vp.tmp' /* source */
+   draginfo.1.5='temp!!vp.tmp' /* target */
+   CALL VpWindow window,'DRAGSTART','DRAGINFO.'
+end
+
+
+
+

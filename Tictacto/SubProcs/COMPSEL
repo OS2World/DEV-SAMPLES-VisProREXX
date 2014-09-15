@@ -1,0 +1,45 @@
+
+Arg bmphandle, window
+
+if selections>8 then do 
+   
+   response=VpMessageBox(window,'Game Over!','This game has ended.')
+   call clear_board
+   return
+   end
+CALL COMPWIN WINDOW
+
+  if win=0 then  /* if computer has no way of winning */
+    CALL COMPMOVE WINDOW 
+    if move=0 & win<>1 then  /* if there is no way for you to win the computer randomly picks his move*/
+  do
+column=random(1,3)
+row=random(1,3)
+IF SELECTED_CELLS.ROW.COLUMN='' THEN
+   do
+      selections=selections+1
+      /* Set cell value 1000 Value Set */
+      CALL VpSetItemValue window,1000,bmphandle,row,column
+      SELECTED_CELLS.ROW.COLUMN=bmphandle 
+            
+       /* CALL TEST WINDOW  /* test for three in a row */
+        if tst=1 then  /* if test is positive (three in a row) then clear board */
+          call clear_board
+        else             
+          return  */             
+   end 
+else 
+   do
+      
+      call COMPSEL bmphandle, window /* if computer randomly picks a cell which has already been picked he repeats his steps */
+   end
+   if selections>8 then do 
+   
+   response=VpMessageBox(window,'Game Over!','This game has ended.')
+   call clear_board
+   return
+   end
+
+end /* end of move do */
+
+return

@@ -1,0 +1,3 @@
+Arg window self
+
+Call VpWindow window, 'EXTENDEDHELP'

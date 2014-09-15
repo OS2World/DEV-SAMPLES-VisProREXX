@@ -1,0 +1,4 @@
+/* Event Clicked/selected - Select  1000 */
+Arg window self
+
+CALL VpImgEdt mainwin,1010,'SETTOOL',self-1000+1

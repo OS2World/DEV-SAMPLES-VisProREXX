@@ -1,0 +1,37 @@
+/* init the edit menu item states */
+arg window
+
+/* Is undo valid  Image Editor */
+value=VpImgEdt(window, 1010, 'ISUNDOVALID')
+if value==0 then
+   /* Disable item ~Undo Menu Item */
+   CALL VpItem window,265,'DISABLE'
+else
+   /* Enable item ~Undo Menu Item */
+   CALL VpItem window,265,'ENABLE'
+
+/* Get selected region 1010 Image Editor */
+rc=VpImgEdt(window, 1010, 'GETSELECTION')
+PARSE VAR rc x1 y1 x2 y2
+if rc='0 0 0 0' then do
+   /* Disable item C~ut Menu Item */
+   CALL VpItem window,266,'DISABLE'
+   /* Disable item ~Copy Menu Item */
+   CALL VpItem window,267,'DISABLE'
+   /* Disable item Clear Menu Item */
+   CALL VpItem window,269,'DISABLE'
+   /* Disable item Select none Menu Item */
+   CALL VpItem window,271,'DISABLE'
+
+end
+else do
+   /* Enable item C~ut Menu Item */
+   CALL VpItem window,266,'ENABLE'
+   /* Enable item ~Copy Menu Item */
+   CALL VpItem window,267,'ENABLE'
+   /* Enable item Clear Menu Item */
+   CALL VpItem window,269,'ENABLE'
+   /* Enable item Select none Menu Item */
+   CALL VpItem window,271,'ENABLE'
+   
+end

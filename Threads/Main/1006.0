@@ -1,0 +1,8 @@
+Arg window self
+
+/* Get item value THREADLST List Box */
+value = VpGetItemValue(window,'THREADLST')
+
+if value > 0 then
+   CALL VpThread "SUSPEND", value
+   

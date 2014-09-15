@@ -1,0 +1,7 @@
+/* Menu events - Import */
+Arg window self
+
+importfile = VpFileDialog(window,'OPEN','*.*','Open Import File')
+
+if importfile<>'' then
+  call import importfile

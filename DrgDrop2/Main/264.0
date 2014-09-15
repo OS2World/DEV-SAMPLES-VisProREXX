@@ -1,0 +1,4 @@
+Arg window self
+
+/* Open the form D:\VISPRORX\PROJECTS\RESOURCE\res*/
+value=VpOpenForm(window, 257, '')

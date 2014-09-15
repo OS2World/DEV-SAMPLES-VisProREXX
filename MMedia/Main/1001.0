@@ -1,0 +1,12 @@
+Arg window self
+
+filename = VpFileDialog(window,'OPEN','*.*','Open File')
+IF LENGTH(filename) > 0 THEN
+   DO
+   /* Movie - load file  MMPM/2 Video Window */
+   CALL VpVideo window, 1000, 'LOAD', filename
+   /* Movie - play loaded movie  MMPM/2 Video Window */
+   CALL VpVideo window, 1000, 'PLAY'
+
+   END
+

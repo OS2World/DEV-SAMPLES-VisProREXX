@@ -1,0 +1,18 @@
+/* Event R  1003, Clicked/selected */
+Arg window self
+
+/* Get button state ~System1003 Check Box */
+flag = VpIsSelected(window,1003)
+if flag==2 then
+ do
+   flag=0
+   /* Uncheck the item ~System1003 Check Box */
+   CALL VpSelect window,1003,flag
+ end
+
+if flag==0 then
+   state='OFF'
+else
+   state='ON'
+ 
+call pressed window, S, posofs, state

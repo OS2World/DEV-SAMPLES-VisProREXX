@@ -1,0 +1,18 @@
+/* Event H  1002, Clicked/selected */
+Arg window self
+
+/* Get button state ~Archive1002 Check Box */
+flag = VpIsSelected(window,1002)
+if flag==2 then
+ do
+   flag=0
+   /* Uncheck the item ~Archive1002 Check Box */
+   CALL VpSelect window,1002,flag
+ end
+
+if flag==0 then
+   state='OFF'
+else
+   state='ON'
+ 
+call pressed window, A, posofa, state

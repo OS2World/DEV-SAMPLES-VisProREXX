@@ -1,0 +1,9 @@
+/* Event Clicked/selected - Request  1004 */
+Arg window self
+
+if reqwindow=0 then
+   /* Open the form E:\VISPRORX\PROJECTS\DDE\Request */
+   reqwindow=VpOpenForm(window, 257, 'topic name')
+else
+   /* Activate the window */
+   CALL VpWindow reqwindow,'ACTIVATE'

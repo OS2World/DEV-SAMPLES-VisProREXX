@@ -1,0 +1,10 @@
+/* Menu events - Play 0 */
+Arg window self
+
+
+USER=ZEROBMP
+OPPONENT=XBMP 
+WINNERX=WINXBMP
+WINNERZERO=WINZEROBMP
+/* Check the item  Play ~0	Ctrl+O259 Menu Item */
+CALL VpSelect window,259,1

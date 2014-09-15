@@ -1,0 +1,9 @@
+Arg window 
+
+/* Set value of application variable COUNTER. */
+/* This value is available to all threads */
+CALL VpAppVariable "SET", "COUNTER", 0
+
+CALL VpThread "GETIDLIST", "VALUE."
+/* Add items from list THREADLST List Box */
+index=VpAddItem(window, 'THREADLST', 'LIST', 'VALUE.')

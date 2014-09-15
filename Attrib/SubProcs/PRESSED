@@ -1,0 +1,61 @@
+arg window, key, position, state
+
+/* Get indexes of all selected items 1001 List Box */
+CALL VpGetIndex window,1001,'ALLSELECTED','INDEXES.'
+
+if indexes.0==0 then
+   /* 1000 Hz for 200 millisec */
+   CALL VpBeep 1000,200
+else
+  do
+    /* Painting disable 1001 List Box */
+    CALL VpItem window,1001,'DISABLEPAINT'
+    
+    /* turn on the hourglass */
+    /* valid index 1 - 22 */
+    value = VpLoadPicture('SYSICON',3)
+    CALL VpWindow window,'SETPOINTER',value
+    
+    /* for each selected file, set the attribute */
+    do x=1 to indexes.0
+
+      /* Get item value at index 1001 List Box */
+      value=VpGetItemValue(window,1001,indexes.x)
+      /* extract current state of attribute specified by KEY */
+      currentattrib=SUBSTR(value, position,1)
+      /* extract file name */ 
+      filename=RIGHT(value, length(value)-posoffilename+1)
+       
+      if state=='TOGGLE' then
+        if currentattrib==' ' then
+           state='ON'
+              
+      if state=='ON' then
+        do
+          'attrib +'key' 'filename' 1>nul'
+        end
+      else
+        do
+          'attrib -'key' 'filename' 1>nul'
+          key=' '
+        end
+      
+      /* display the new attribute value */
+      value=overlay(key,value,position)
+
+      /* Set item value at index 1001 List Box */
+      CALL VpSetItemValue window, 1001, value, indexes.x          
+    end
+
+   /* turn on the arrow */
+   /* valid index 1 - 22 */
+   value = VpLoadPicture('SYSICON',1)
+   CALL VpWindow window,'SETPOINTER',value
+
+   /* Painting enable 1001 List Box */
+   CALL VpItem window,1001,'ENABLEPAINT'
+
+   call click window
+end   
+       
+   

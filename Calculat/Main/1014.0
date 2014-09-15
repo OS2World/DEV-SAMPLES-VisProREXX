@@ -1,0 +1,5 @@
+Arg window self
+
+CALL tabulate window
+OPER='='
+

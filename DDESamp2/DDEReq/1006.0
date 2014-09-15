@@ -1,0 +1,11 @@
+/* Event Clicked/selected - Request  1006 */
+Arg window self
+
+/* Get item value ITEMNAME Entry Field */
+value = VpGetItemValue(window,'ITEMNAME')
+
+/* Request data DDECLIENT DDE Client */
+value=VpDDECLT(mainwindow, 'DDECLIENT', 'REQUEST',value)
+
+/* Set item value RESULTS Multi-Line Entry Field */
+CALL VpSetItemValue window,'RESULTS',value

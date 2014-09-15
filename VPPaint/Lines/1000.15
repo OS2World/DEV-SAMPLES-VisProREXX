@@ -1,0 +1,33 @@
+Arg window self
+
+/* Get item size  Free-form Window */
+xy=VpItem(window,1000,'ITEMSIZE')
+PARSE VAR xy cx cy
+delta=cy/8
+
+/* Get line type  Image Editor */
+value=VpImgEdt(mainwin, 1010, 'GETLINETYPE')
+if value==9 then
+   value=8
+
+y=(value-1)*delta
+cx=cx-1
+
+CALL VpDraw window,1000,'LINETYPE',7
+/* Move graphics cursor  Free-form Window */
+CALL VpDraw window,1000,'MOVE',0,y
+/* Draw a box  Free-form Window */
+CALL VpDraw window,1000,'BOX',cx,y+delta-1
+y=delta/2
+do i=1 to 8
+   /* Set line type  Free-form Window */
+   if i==8 then
+      i=9
+   CALL VpDraw window,1000,'LINETYPE',i
+   /* Move graphics cursor  Free-form Window */
+   CALL VpDraw window,1000,'MOVE',1,y
+   /* Draw a line  Free-form Window */
+   CALL VpDraw window,1000,'LINE',cx,y
+   y=y+delta
+end
+

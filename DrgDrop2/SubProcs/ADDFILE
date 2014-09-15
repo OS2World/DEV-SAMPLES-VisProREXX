@@ -1,0 +1,32 @@
+parse arg value.3 ' ' value.2 ' ' change
+
+image = VpLoadPicture('FILE',value.3)
+
+if change then
+do
+  /* Get item columns at index  Container */
+  /* COLUMNS.0 - count */
+  /* COLUMNS.n - nth columns */
+  CALL VpGetItemValue window,1000,'DETAILS','COLUMNS.',current_index
+
+  /* window object_id type */
+  value.1 = check(window columns.1 value.2 current_index)
+
+  /* Add an item after an item with icon  Container */
+  index=VpAddItem(window, 1000, current_index, 'VALUE.', image)
+
+  /* Delete a list item  Container */
+  CALL VpDeleteItem window,1000, current_index
+
+end
+else
+do
+  value.0 = image
+
+  value.1 = id(window value.2)
+
+  /* Add item to end  Container */
+  index=VpAddItem(window, 1000, 'END', 'VALUE.',image)
+end
+changed=1
+

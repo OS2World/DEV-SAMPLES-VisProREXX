@@ -1,0 +1,4 @@
+Arg window self
+
+/* Get item value  Entry Field */
+MEM = VpGetItemValue(window,1001)

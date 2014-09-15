@@ -1,0 +1,11 @@
+/**/
+
+value=''
+/* Get selection range 1000 Multi-Line Entry Field */
+parse value VpGetIndex(window,1000) with first last
+/* Get text in range 1000 Multi-Line Entry Field */ 
+value = VpGetItemValue(window,1000,first,last+1)
+if value<>'' then
+  value=left(value,length(value)-1)
+
+return value

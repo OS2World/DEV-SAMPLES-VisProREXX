@@ -1,0 +1,5 @@
+/* Menu events - Undo */
+Arg window self
+
+/* Undo last change 1000 Multi-Line Entry Field */
+rc=VpItem(window,1000,'SENDMSG','0x01ce')

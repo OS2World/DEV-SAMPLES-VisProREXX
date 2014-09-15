@@ -1,0 +1,5 @@
+/* Menu events - Select none	Ctrl+\ */
+Arg window self
+
+/* Unselect all items 1000 Multi-Line Entry Field */
+CALL VpSelect window,1000,'ALL',0

@@ -1,0 +1,20 @@
+/* Get image attributes  Image Editor */
+rc=VpImgEdt(mainwin, 1010, 'GETBMPATTRIBUTES')
+PARSE VAR rc x y numcolors
+
+/* Set item value  Spin Button */
+CALL VpSetItemValue attrwin,1004,x
+
+
+/* Set item value  Spin Button */
+CALL VpSetItemValue attrwin,1005,y
+if numcolors==2 then
+   /* Check the item  ~1 Radio Button */
+   CALL VpSelect attrwin,1000,1
+else
+if numcolors==16 then
+   /* Check the item  ~4 Radio Button */
+   CALL VpSelect attrwin,1001,1
+else
+   /* Check the item  ~8 Radio Button */
+   CALL VpSelect attrwin,1006,1

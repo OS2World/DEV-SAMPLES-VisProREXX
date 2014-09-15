@@ -1,0 +1,6 @@
+/*******/
+Parse Arg window self
+
+/* Select item CLEAR Push Button */
+CALL VpSelect window,'CLEAR'
+

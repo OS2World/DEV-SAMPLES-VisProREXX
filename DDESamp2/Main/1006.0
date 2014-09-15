@@ -1,0 +1,5 @@
+/* Event Clicked/selected - Execute...  1006 */
+Arg window self
+
+/* Open the form C:\DESKTOP1\DDE\EXECUTE */
+value=VpOpenForm(window, 259, 'topic name')

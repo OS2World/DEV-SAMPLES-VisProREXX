@@ -1,0 +1,10 @@
+Arg window self index
+
+/* Get item value  Container */
+value = VpGetItemValue(window,1000)
+if value = '' then
+  return
+
+/* Select item Change resource... Menu Item */
+CALL VpSelect window,257
+

@@ -1,0 +1,9 @@
+Arg window self
+
+if colorwin<>0 then do
+   /* Get color  Image Editor */
+   value=VpImgEdt(window, 1010, 'GETCOLOR')
+   /* Set item value  Color Selector */
+   CALL VpSetItemValue colorwin,1001,value 
+
+end

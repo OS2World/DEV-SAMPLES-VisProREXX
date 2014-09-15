@@ -1,0 +1,32 @@
+/* Event Container  1000, Drag start */
+Arg window self index
+if index=0 then
+  return
+nameoffile.=''
+/* Get selection state of item 1000 Container */
+value=VpIsSelected(window,1000,index)
+if value=0 then
+  /* Select item 1000 Container */
+  CALL VpSelect window,1000,index,1
+/* Get indexes of all selected items 1000 Container */
+CALL VpGetIndex window,1000,'ALLSELECTED','INDEXES.'
+do x=1 to indexes.0
+  /* Get item value at index 1000 Container */
+  nameoffile.x=VpGetItemValue(window,1000,indexes.x)
+end  
+draginfo.0=1 /* count */
+draginfo.1=1 /* moveable */
+draginfo.2=1 /* copyable */
+draginfo.3=1 /* linkable */
+draginfo.4=0 /* optional icon */
+DO X=1 TO INDEXES.0
+  draginfo.x.1='Icon' /* type */
+  draginfo.x.2='<DRM_OS2FILE,DRF_TEXT>' /* rendering */
+  draginfo.x.3='c:\'    /* source dir */
+  draginfo.x.4=nameoffile.x /* source */
+  draginfo.x.5=nameoffile.x /* target */
+END
+CALL VpWindow window,'DRAGSTART','DRAGINFO.'
+    
+
+
